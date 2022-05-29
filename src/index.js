@@ -1,7 +1,14 @@
 import { ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
+import Favorite from './pages/Favorite';
+import Home from './pages/Home';
+import Landing from './pages/Landing';
+import NotFound from './pages/NotFound';
+import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
@@ -10,8 +17,19 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <ColorModeScript />
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <ColorModeScript />
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="" element={<Landing />} />
+            <Route path="home" element={<Home />} />
+            <Route path="favorite" element={<Favorite />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </StrictMode>
 );
 
