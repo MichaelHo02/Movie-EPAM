@@ -1,83 +1,8 @@
-import {
-  Box,
-  Button,
-  chakra,
-  Flex,
-  Tag,
-  Text,
-  useCheckbox,
-  useCheckboxGroup,
-  useColorModeValue,
-} from '@chakra-ui/react';
-
-function CustomCheckbox(props) {
-  const { state, getCheckboxProps, getInputProps, htmlProps } =
-    useCheckbox(props);
-
-  const backgroundColor = useColorModeValue('teal.500', 'teal.600');
-
-  return (
-    <chakra.label {...htmlProps}>
-      <input {...getInputProps()} hidden />
-      <Box
-        cursor={'pointer'}
-        size={'lg'}
-        fontSize={'lg'}
-        borderRadius={'full'}
-        backgroundColor={'gray.300'}
-        color={'black'}
-        _checked={{
-          backgroundColor: backgroundColor,
-          boxShadow: 'md',
-          color: 'white',
-        }}
-        paddingX={4}
-        paddingY={1}
-        boxShadow={'inner'}
-        {...getCheckboxProps()}
-      >
-        {props.children}
-      </Box>
-    </chakra.label>
-  );
-}
+import { Box, Flex, Text, useCheckboxGroup } from '@chakra-ui/react';
+import CheckBox from './CheckBox';
 
 const GenresController = () => {
-  const options = [
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-    'react',
-    'vue',
-    'svelte',
-  ];
+  const options = ['react', 'vue', 'svelte'];
 
   const { value, getCheckboxProps } = useCheckboxGroup({});
   return (
@@ -89,9 +14,9 @@ const GenresController = () => {
         {options.map((item, index) => {
           const checkbox = getCheckboxProps({ value: item });
           return (
-            <CustomCheckbox key={index} {...checkbox}>
+            <CheckBox key={index} {...checkbox}>
               {item}
-            </CustomCheckbox>
+            </CheckBox>
           );
         })}
       </Flex>

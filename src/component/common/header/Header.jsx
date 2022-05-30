@@ -1,3 +1,4 @@
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
@@ -5,18 +6,15 @@ import {
   Flex,
   HStack,
   IconButton,
-  Spacer,
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { clearUser } from '../../../redux/slices/authSlice';
 import Logo from '../../landing/logo/Logo';
 import ColorModeSwitcher from '../button/ColorModeSwitcher';
 import SignInModal from '../modal/SignInModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from '../../../redux/slices/authSlice';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 const Header = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
