@@ -11,7 +11,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import SignUpModal from '../../common/modal/SignUpModal';
-import { updateEmail } from './signUpSlice';
+import { updateEmail } from '../../../redux/slices/authSlice';
 
 const SignUpForm = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();

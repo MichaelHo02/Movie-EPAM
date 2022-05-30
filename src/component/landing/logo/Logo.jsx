@@ -17,10 +17,16 @@ const Logo = () => {
         backgroundColor={specialBg}
         padding={1}
         borderRadius={'base'}
+        fontSize={{ lg: '2xl', md: '4xl', sm: '4xl', base: 'xl' }}
       >
         We
       </Heading>
-      <Heading color={textColor}>Watch</Heading>
+      <Heading
+        color={textColor}
+        fontSize={{ lg: '2xl', md: '4xl', sm: '4xl', base: 'xl' }}
+      >
+        Watch
+      </Heading>
     </HStack>
   );
 };

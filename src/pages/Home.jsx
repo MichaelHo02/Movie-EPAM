@@ -1,7 +1,11 @@
-import React from 'react';
+import Authentication from '../component/common/auth/Authentication';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <Authentication>
+      <div>Home</div>
+    </Authentication>
+  );
 };
 
 export default Home;

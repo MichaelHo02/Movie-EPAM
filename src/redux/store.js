@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import signUpSlice from '../component/landing/hero/signUpSlice';
+import authSlice from './slices/authSlice';
 
 const store = configureStore({
   reducer: {
-    signUpInfo: signUpSlice,
+    authInfo: authSlice,
   },
 });
 

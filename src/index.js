@@ -8,6 +8,7 @@ import Favorite from './pages/Favorite';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
+import TvShows from './pages/TvShows';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -25,6 +26,7 @@ root.render(
             <Route path="" element={<Landing />} />
             <Route path="home" element={<Home />} />
             <Route path="favorite" element={<Favorite />} />
+            <Route path="tv-shows" element={<TvShows />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

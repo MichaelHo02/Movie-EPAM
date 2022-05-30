@@ -6,19 +6,29 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import CustomInput from '../form/CustomInput';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../../redux/slices/authSlice';
+import { getResponse, getSignUpUsername } from '../../../redux/selectors';
 YupPassword(Yup);
 
 const SignInModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const initRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const toast = useToast();
+
+  const response = useSelector(getResponse);
+  const username = useSelector(getSignUpUsername);
 
   const formik = useFormik({
     initialValues: {
@@ -27,14 +37,36 @@ const SignInModal = ({ isOpen, onClose }) => {
     },
     validationSchema: Yup.object({
       email: Yup.string().required('Email is required').email('Invalid Email'),
-      password: Yup.string().required('Password is required').password(),
+      password: Yup.string().required('Password is required'),
     }),
     onSubmit: () => {
+      dispatch(login(formik.values));
+    },
+  });
+
+  useEffect(() => {
+    if (!response.success && response.message !== '') {
+      toast({
+        title: 'Sign In Status.',
+        description: response.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } else if (response.success) {
+      toast({
+        title: `Welcome back! ${username}`,
+        description: response.message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      localStorage.setItem('auth_WeWatch', '123456789');
       formik.resetForm();
       onClose();
       navigate('home');
-    },
-  });
+    }
+  }, [response]);
   return (
     <Modal
       isCentered
@@ -80,13 +112,7 @@ const SignInModal = ({ isOpen, onClose }) => {
           >
             Close
           </Button>
-          <Button
-            colorScheme={'teal'}
-            onClick={() => {
-              onClose();
-              navigate('home');
-            }}
-          >
+          <Button colorScheme={'teal'} onClick={formik.handleSubmit}>
             Submit
           </Button>
         </ModalFooter>

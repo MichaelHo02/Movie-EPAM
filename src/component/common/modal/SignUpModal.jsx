@@ -6,21 +6,22 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
 import { useFormik } from 'formik';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSignUpEmail } from '../../../redux/selectors';
-import {
-  updateEmail,
-  updateUsername,
-  updatePassword,
-} from '../../landing/hero/signUpSlice';
 import { useNavigate } from 'react-router-dom';
-import CustomInput from '../form/CustomInput';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
+import {
+  getResponse,
+  getSignUpEmail,
+  getSignUpUsername,
+} from '../../../redux/selectors';
+import { register } from '../../../redux/slices/authSlice';
+import CustomInput from '../form/CustomInput';
 
 YupPassword(Yup);
 
@@ -29,6 +30,9 @@ const SignUpModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const initRef = useRef(null);
 
+  const toast = useToast();
+  const username = useSelector(getSignUpUsername);
+  const response = useSelector(getResponse);
   let email = useSelector(getSignUpEmail);
 
   const formik = useFormik({
@@ -49,14 +53,33 @@ const SignUpModal = ({ isOpen, onClose }) => {
         .max(10, 'Maximum password is 10 characters'),
     }),
     onSubmit: () => {
-      dispatch(updateEmail(formik.values.email));
-      dispatch(updateUsername(formik.values.username));
-      dispatch(updatePassword(formik.values.password));
+      dispatch(register(formik.values));
+    },
+  });
+
+  useEffect(() => {
+    if (!response.success && response.message !== '') {
+      toast({
+        title: 'Sign Up Status.',
+        description: response.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } else if (response.success) {
+      toast({
+        title: `Welcome back! ${username}`,
+        description: response.message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      localStorage.setItem('auth_WeWatch', '123456789');
       formik.resetForm();
       onClose();
       navigate('home');
-    },
-  });
+    }
+  }, [response]);
   return (
     <Modal
       isCentered

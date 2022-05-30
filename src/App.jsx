@@ -6,7 +6,7 @@ import Header from './component/common/header/Header';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box paddingX={10} paddingY={5}>
+      <Box marginX={10} marginY={5}>
         <Header />
         <Outlet />
         <Footer />
