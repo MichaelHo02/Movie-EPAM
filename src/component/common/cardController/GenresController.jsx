@@ -1,23 +1,25 @@
 import { Box, Flex, Text, useCheckboxGroup } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import tvShowsAPI from '../../../api/services/tvShowsAPI';
+import { fetchGenre } from '../../../redux/slices/genreSlice';
 import CheckBox from './CheckBox';
 
 const GenresController = () => {
   const { value, getCheckboxProps } = useCheckboxGroup({});
-  const [genres, setGenres] = useState([]);
+  const dispatch = useDispatch();
+  const genreList = useSelector(state => state.genreInfo.data);
   useEffect(() => {
-    tvShowsAPI.getGenres().then(res => {
-      setGenres(res.data.genres);
-    });
-  }, []);
+    dispatch(fetchGenre());
+  }, [dispatch]);
+
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
         Genres:
       </Text>
       <Flex flexWrap={'wrap'} gap={4} paddingY={4}>
-        {genres.map((genre, index) => {
+        {genreList.map((genre, index) => {
           const checkbox = getCheckboxProps({ value: genre.name });
           return (
             <CheckBox key={index} {...checkbox}>

@@ -5,6 +5,7 @@ import genreSlice from './slices/genreSlice';
 const store = configureStore({
   reducer: {
     authInfo: authSlice,
+    genreInfo: genreSlice,
   },
 });
 
