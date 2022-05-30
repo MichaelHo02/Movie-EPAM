@@ -23,6 +23,9 @@ const CustomInput = ({
 }) => {
   const [show, setShow] = useState(false);
   const handleShowPassword = () => setShow(!show);
+  const capitalizeFirstLetter = s => {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
   return (
     <FormControl isInvalid={isInValid} isRequired>
       <FormLabel htmlFor={name} fontSize={'lg'}>
@@ -49,7 +52,7 @@ const CustomInput = ({
         )}
       </InputGroup>
       {isInValid ? (
-        <FormErrorMessage>{error}</FormErrorMessage>
+        <FormErrorMessage>{capitalizeFirstLetter(error)}</FormErrorMessage>
       ) : (
         <FormHelperText>{defaultHelpText}</FormHelperText>
       )}

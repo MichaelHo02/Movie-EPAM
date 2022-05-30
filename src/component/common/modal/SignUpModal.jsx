@@ -14,8 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSignUpEmail } from '../../../redux/selectors';
 import {
   updateEmail,
-  updateFirstName,
-  updateLastName,
+  updateUsername,
   updatePassword,
 } from '../../landing/hero/signUpSlice';
 import { useNavigate } from 'react-router-dom';
@@ -34,27 +33,24 @@ const SignUpModal = ({ isOpen, onClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
+      username: '',
       email: email,
       password: '',
     },
     validationSchema: Yup.object({
       email: Yup.string().required('Email is required').email('Invalid Email'),
-      firstName: Yup.string()
-        .required('First name is required')
+      username: Yup.string()
+        .required('User name is required')
         .min(2, 'At least 2 letters required')
         .max(100, 'Maximum letter is 100'),
-      lastName: Yup.string()
-        .required('Last name is required')
-        .min(2, 'At least 2 letters required')
-        .max(100, 'Maximum letter is 100'),
-      password: Yup.string().required('Password is required').password(),
+      password: Yup.string()
+        .required('Password is required')
+        .password()
+        .max(10, 'Maximum password is 10 characters'),
     }),
     onSubmit: () => {
       dispatch(updateEmail(formik.values.email));
-      dispatch(updateFirstName(formik.values.firstName));
-      dispatch(updateLastName(formik.values.lastName));
+      dispatch(updateUsername(formik.values.username));
       dispatch(updatePassword(formik.values.password));
       formik.resetForm();
       onClose();
@@ -85,26 +81,15 @@ const SignUpModal = ({ isOpen, onClose }) => {
               formikProps={{ ...formik.getFieldProps('email') }}
             />
             <CustomInput
-              label={'First Name'}
-              name={'firstName'}
-              placeholder={'Enter your first name'}
+              label={'User Name'}
+              name={'username'}
+              placeholder={'Enter your user name'}
               type={'text'}
-              defaultHelpText={'First name can be seen by other users.'}
-              isInValid={formik.errors?.firstName && formik.touched.firstName}
-              error={formik.errors.firstName}
+              defaultHelpText={'User name can be seen by other users.'}
+              isInValid={formik.errors?.username && formik.touched.username}
+              error={formik.errors.username}
               setFieldTouched={formik.setFieldTouched}
-              formikProps={{ ...formik.getFieldProps('firstName') }}
-            />
-            <CustomInput
-              label={'Last Name'}
-              name={'lastName'}
-              placeholder={'Enter your last name'}
-              type={'text'}
-              defaultHelpText={'Last name can be seen by other users.'}
-              isInValid={formik.errors?.lastName && formik.touched.lastName}
-              error={formik.errors.lastName}
-              setFieldTouched={formik.setFieldTouched}
-              formikProps={{ ...formik.getFieldProps('lastName') }}
+              formikProps={{ ...formik.getFieldProps('username') }}
             />
 
             <CustomInput
