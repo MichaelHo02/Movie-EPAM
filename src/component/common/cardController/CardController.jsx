@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   Box,
   Heading,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react';
 import GenresController from './GenresController';
 

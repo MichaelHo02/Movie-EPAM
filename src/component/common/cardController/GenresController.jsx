@@ -1,21 +1,27 @@
 import { Box, Flex, Text, useCheckboxGroup } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import tvShowsAPI from '../../../api/services/tvShowsAPI';
 import CheckBox from './CheckBox';
 
 const GenresController = () => {
-  const options = ['react', 'vue', 'svelte'];
-
   const { value, getCheckboxProps } = useCheckboxGroup({});
+  const [genres, setGenres] = useState([]);
+  useEffect(() => {
+    tvShowsAPI.getGenres().then(res => {
+      setGenres(res.data.genres);
+    });
+  }, []);
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
         Genres:
       </Text>
       <Flex flexWrap={'wrap'} gap={4} paddingY={4}>
-        {options.map((item, index) => {
-          const checkbox = getCheckboxProps({ value: item });
+        {genres.map((genre, index) => {
+          const checkbox = getCheckboxProps({ value: genre.name });
           return (
             <CheckBox key={index} {...checkbox}>
-              {item}
+              {genre.name}
             </CheckBox>
           );
         })}

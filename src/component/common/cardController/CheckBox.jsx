@@ -1,5 +1,4 @@
-import { useColorModeValue, useCheckbox, chakra, Box } from '@chakra-ui/react';
-import React from 'react';
+import { Box, chakra, useCheckbox, useColorModeValue } from '@chakra-ui/react';
 
 const CheckBox = props => {
   const { state, getCheckboxProps, getInputProps, htmlProps } =

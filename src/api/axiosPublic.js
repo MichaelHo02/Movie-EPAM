@@ -2,7 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const axiosPublic = axios.create({
-  baseUrl: 'http://localhost:5000',
+  baseURL: 'https://api.themoviedb.org/3',
   headers: {
     'Content-Type': 'application/json',
   },
