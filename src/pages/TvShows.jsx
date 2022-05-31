@@ -25,7 +25,7 @@ const TvShows = () => {
                 <Card
                   key={index}
                   date={card.first_air_date}
-                  title={card.original_name}
+                  title={card.name}
                   {...card}
                 />
               );

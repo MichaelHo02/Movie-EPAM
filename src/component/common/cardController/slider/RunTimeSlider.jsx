@@ -13,8 +13,8 @@ import { useDispatch } from 'react-redux';
 import { updateRuntimes } from '../../../../redux/slices/filterSlice';
 
 const RunTimeSlider = () => {
-  const [sliderValueLeft, setSliderValueLeft] = useState(50);
-  const [sliderValueRight, setSliderValueRight] = useState(350);
+  const [sliderValueLeft, setSliderValueLeft] = useState(0);
+  const [sliderValueRight, setSliderValueRight] = useState(400);
   const [showTooltip, setShowTooltip] = useState(false);
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ const RunTimeSlider = () => {
           marginBottom={4}
         >
           <RangeSlider
-            defaultValue={[50, 350]}
+            defaultValue={[0, 400]}
             min={0}
             max={400}
             step={2}

@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { updateVoteAvg } from '../../../../redux/slices/filterSlice';
 
 const VoteAveragedSlider = () => {
-  const [sliderValue, setSliderValue] = useState(5);
+  const [sliderValue, setSliderValue] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const VoteAveragedSlider = () => {
       <Box padding={4}>
         <Slider
           id="slider"
-          defaultValue={5}
+          defaultValue={0}
           min={0}
           max={10}
           step={1}

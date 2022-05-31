@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { updateVoteCount } from '../../../../redux/slices/filterSlice';
 
 const VoteCountSlider = () => {
-  const [sliderValue, setSliderValue] = useState(50);
+  const [sliderValue, setSliderValue] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const VoteCountSlider = () => {
       <Box padding={4}>
         <Slider
           id="slider"
-          defaultValue={50}
+          defaultValue={0}
           min={0}
           max={500}
           step={5}
