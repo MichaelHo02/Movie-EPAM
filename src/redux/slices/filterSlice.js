@@ -13,13 +13,14 @@ const filterSlice = createSlice({
       'vote_count.gte': null,
       'with_runtime.gte': null,
       'with_runtime.lte': null,
+      sort_by: null,
     },
     response: {
       success: null,
       message: '',
     },
     pagination: {
-      page: null,
+      page: 1,
       total_pages: null,
       total_results: null,
       results: null,
@@ -51,6 +52,9 @@ const filterSlice = createSlice({
     updateRuntimesLTE: (state, action) => {
       state.data['with_runtime.lte'] = action.payload;
     },
+    updateSort: (state, action) => {
+      state.data.sort_by = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -73,15 +77,19 @@ export const {
   updateRuntimesGTE,
   updateRuntimesLTE,
   updateRuntimes,
+  updateSort,
 } = filterSlice.actions;
 
 export const fetchTV = createAsyncThunk(
   'filter/fetch',
-  async (tmp, thunkAPI) => {
+  async (param, thunkAPI) => {
+    param = param && param > 0 ? param : 0;
     const thunkData = thunkAPI.getState().filterInfo.data;
+    const currentPage = thunkAPI.getState().filterInfo.pagination.page;
     const data = {
       ...thunkData,
       with_genres: thunkData.with_genres.toString(),
+      page: currentPage + param,
     };
     const res = await tvShowsAPI.getTvShows(data);
     return res.data;

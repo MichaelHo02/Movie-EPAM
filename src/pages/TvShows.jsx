@@ -13,7 +13,6 @@ const TvShows = () => {
   useEffect(() => {
     dispatch(fetchTV());
   }, [dispatch]);
-  console.log(selector);
   return (
     <>
       <Authentication>
