@@ -31,7 +31,6 @@ const genreSlice = createSlice({
 export const { getGenre } = genreSlice.actions;
 
 export const fetchGenre = createAsyncThunk('genre/fetch', async () => {
-  console.log('object');
   const res = await tvShowsAPI.getGenres();
   return res.data;
 });

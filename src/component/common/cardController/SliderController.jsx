@@ -8,11 +8,19 @@ import {
   Tooltip,
   SliderThumb,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateVoteCount } from '../../../redux/slices/filterSlice';
 
 const SliderController = () => {
   const [sliderValue, setSliderValue] = useState(50);
   const [showTooltip, setShowTooltip] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(updateVoteCount(sliderValue));
+  }, []);
+
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
@@ -26,7 +34,10 @@ const SliderController = () => {
           max={500}
           step={5}
           colorScheme="teal"
-          onChange={v => setSliderValue(v)}
+          onChange={v => {
+            setSliderValue(v);
+            dispatch(updateVoteCount(v));
+          }}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >

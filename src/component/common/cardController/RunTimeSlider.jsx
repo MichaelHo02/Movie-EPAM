@@ -9,12 +9,25 @@ import {
   Tooltip,
   useRangeSlider,
 } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateRuntimes } from '../../../redux/slices/filterSlice';
 
 const RunTimeSlider = () => {
   const [sliderValueLeft, setSliderValueLeft] = useState(50);
   const [sliderValueRight, setSliderValueRight] = useState(350);
   const [showTooltip, setShowTooltip] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      updateRuntimes({
+        'with_runtime.gte': sliderValueLeft,
+        'with_runtime.lte': sliderValueRight,
+      })
+    );
+  }, []);
+
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
@@ -37,6 +50,12 @@ const RunTimeSlider = () => {
             onChange={v => {
               setSliderValueLeft(v[0]);
               setSliderValueRight(v[1]);
+              dispatch(
+                updateRuntimes({
+                  'with_runtime.gte': v[0],
+                  'with_runtime.lte': v[1],
+                })
+              );
             }}
             onMouseEnter={() => {
               setShowTooltip(true);

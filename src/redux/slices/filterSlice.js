@@ -29,7 +29,11 @@ const filterSlice = createSlice({
       state.data['with_genres'] = action.payload;
     },
     updateVoteCount: (state, action) => {
-      state.data['vote_count'] = action.payload;
+      state.data['vote_count.gte'] = action.payload;
+    },
+    updateRuntimes: (state, action) => {
+      state.data['with_runtime.gte'] = action.payload['with_runtime.gte'];
+      state.data['with_runtime.lte'] = action.payload['with_runtime.lte'];
     },
     updateRuntimesGTE: (state, action) => {
       state.data['with_runtime.gte'] = action.payload;
@@ -52,11 +56,15 @@ export const {
   updateVoteCount,
   updateRuntimesGTE,
   updateRuntimesLTE,
+  updateRuntimes,
 } = filterSlice.actions;
 
-export const fetchTV = createAsyncThunk('filter/fetch', async thunkAPI => {
-  console.log(thunkAPI.getState);
-  // const res = await tvShowsAPI.getTvShows();
-});
+export const fetchTV = createAsyncThunk(
+  'filter/fetch',
+  async (tmp, thunkAPI) => {
+    console.log(thunkAPI.getState().filterInfo.data);
+    // const res = await tvShowsAPI.getTvShows();
+  }
+);
 
 export default filterSlice.reducer;

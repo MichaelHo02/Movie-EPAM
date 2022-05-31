@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import DatePicker, { CalendarContainer } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from 'react-redux';
@@ -23,6 +23,7 @@ const AirDateController = () => {
       width={'100%'}
       variant={'solid'}
       colorScheme={'teal'}
+      boxShadow={'md'}
       fontSize={'lg'}
     >
       {value}
@@ -48,6 +49,11 @@ const AirDateController = () => {
     dispatch(dispatchCallbacks(date.toISOString()));
   };
 
+  useEffect(() => {
+    handleSetDate(startDate, setStartDate, updateAirDateGTE);
+    handleSetDate(endDate, setEndDate, updateAirDateLTE);
+  }, []);
+
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
@@ -69,9 +75,7 @@ const AirDateController = () => {
         <Box width={'full'}>
           <DatePicker
             selected={endDate}
-            onChange={date =>
-              handleSetDate(date, setStartDate, updateAirDateLTE)
-            }
+            onChange={date => handleSetDate(date, setEndDate, updateAirDateLTE)}
             customInput={<CustomInput />}
             calendarContainer={CustomCalendarContainer}
             minDate={startDate}

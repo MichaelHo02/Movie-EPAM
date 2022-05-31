@@ -7,6 +7,8 @@ import {
   Button,
   Heading,
 } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { fetchTV } from '../../../redux/slices/filterSlice';
 import AccordionHolder from './AccordionHolder';
 import AirDateController from './AirDateController';
 import GenresController from './GenresController';
@@ -14,6 +16,11 @@ import RunTimeSlider from './RunTimeSlider';
 import SliderController from './SliderController';
 
 const Filter = () => {
+  const dispatch = useDispatch();
+  const handleOnClick = e => {
+    dispatch(fetchTV());
+  };
+
   return (
     <>
       <Accordion defaultIndex={[0]} allowMultiple>
@@ -26,16 +33,19 @@ const Filter = () => {
               <AccordionIcon />
             </AccordionButton>
           </AccordionHolder>
+
           <AccordionHolder>
             <AccordionPanel>
               <GenresController />
             </AccordionPanel>
           </AccordionHolder>
+
           <AccordionHolder>
             <AccordionPanel>
               <SliderController />
             </AccordionPanel>
           </AccordionHolder>
+
           <AccordionHolder>
             <AccordionPanel>
               <RunTimeSlider />
@@ -47,9 +57,16 @@ const Filter = () => {
               <AirDateController />
             </AccordionPanel>
           </AccordionHolder>
+
           <AccordionHolder>
             <AccordionPanel>
-              <Button marginTop={2} width={'full'} colorScheme={'orange'}>
+              <Button
+                marginTop={3}
+                width={'full'}
+                colorScheme={'orange'}
+                boxShadow={'md'}
+                onClick={handleOnClick}
+              >
                 Submit
               </Button>
             </AccordionPanel>

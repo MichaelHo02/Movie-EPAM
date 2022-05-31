@@ -2,6 +2,7 @@ import { Box, Flex, Text, useCheckboxGroup } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import tvShowsAPI from '../../../api/services/tvShowsAPI';
+import { updateGenres } from '../../../redux/slices/filterSlice';
 import { fetchGenre } from '../../../redux/slices/genreSlice';
 import CheckBox from './CheckBox';
 
@@ -12,6 +13,10 @@ const GenresController = () => {
   useEffect(() => {
     dispatch(fetchGenre());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(updateGenres(value));
+  }, [dispatch, value]);
 
   return (
     <Box>
