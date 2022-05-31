@@ -11,7 +11,7 @@ import {
 const AirDateController = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const [startDate, setStartDate] = useState(today);
+  const [startDate, setStartDate] = useState(new Date(0));
   const [endDate, setEndDate] = useState(today);
 
   const dispatch = useDispatch();

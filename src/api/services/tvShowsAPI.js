@@ -7,7 +7,7 @@ const constParam = {
 
 const tvShowsAPI = {
   getGenres: () => {
-    const url = `/genre/movie/list`;
+    const url = `/genre/tv/list`;
     return axiosPublic.get(url, { params: constParam });
   },
 

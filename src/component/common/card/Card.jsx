@@ -142,7 +142,7 @@ const Card = ({
 
           <Spacer />
 
-          <ButtonGroup display={{ lg: 'block', md: 'none' }}>
+          <ButtonGroup display={{ lg: 'block', base: 'none' }}>
             <CustomizeTooltip message={'Like if you love it'}>
               <IconButton
                 icon={<BiLike />}
@@ -163,7 +163,12 @@ const Card = ({
             <Button
               leftIcon={<BiLike />}
               colorScheme={'teal'}
-              display={{ lg: 'none', md: 'initial', sm: 'none', base: 'none' }}
+              display={{
+                lg: 'none',
+                md: 'initial',
+                sm: 'initial',
+                base: 'none',
+              }}
               boxShadow={'md'}
             >
               Like
@@ -174,7 +179,12 @@ const Card = ({
             <Button
               leftIcon={<StarIcon />}
               colorScheme={'orange'}
-              display={{ lg: 'none', md: 'initial', sm: 'none', base: 'none' }}
+              display={{
+                lg: 'none',
+                md: 'initial',
+                sm: 'initial',
+                base: 'none',
+              }}
               boxShadow={'md'}
             >
               Favorite
