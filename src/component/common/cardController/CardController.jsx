@@ -6,9 +6,12 @@ import {
   AccordionPanel,
   Box,
   Heading,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
+import AccordionHolder from './AccordionHolder';
 import GenresController from './GenresController';
+import RunTimeSlider from './RunTimeSlider';
+import SliderController from './SliderController';
 
 const Filter = () => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.600');
@@ -16,31 +19,29 @@ const Filter = () => {
     <>
       <Accordion defaultIndex={[0]} allowMultiple>
         <AccordionItem marginY={8} border={'none'}>
-          <Box height={'full'}>
-            <AccordionButton
-              backgroundColor={backgroundColor}
-              borderRadius={'md'}
-              boxShadow={'md'}
-              _hover={{
-                opacity: 0.7,
-              }}
-            >
+          <AccordionHolder>
+            <AccordionButton borderRadius={'inherit'}>
               <Heading flex={1} textAlign={'left'}>
                 Filter
               </Heading>
               <AccordionIcon />
             </AccordionButton>
-          </Box>
-          <Box
-            marginY={4}
-            backgroundColor={backgroundColor}
-            borderRadius={'md'}
-            boxShadow={'md'}
-          >
+          </AccordionHolder>
+          <AccordionHolder>
             <AccordionPanel>
               <GenresController />
             </AccordionPanel>
-          </Box>
+          </AccordionHolder>
+          <AccordionHolder>
+            <AccordionPanel>
+              <SliderController />
+            </AccordionPanel>
+          </AccordionHolder>
+          <AccordionHolder>
+            <AccordionPanel>
+              <RunTimeSlider />
+            </AccordionPanel>
+          </AccordionHolder>
         </AccordionItem>
       </Accordion>
     </>
