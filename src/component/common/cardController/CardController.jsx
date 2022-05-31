@@ -12,8 +12,9 @@ import { fetchTV } from '../../../redux/slices/filterSlice';
 import AccordionHolder from './AccordionHolder';
 import AirDateController from './AirDateController';
 import GenresController from './GenresController';
-import RunTimeSlider from './RunTimeSlider';
-import SliderController from './SliderController';
+import RunTimeSlider from './slider/RunTimeSlider';
+import VoteAveragedSlider from './slider/VoteAveragedSlider';
+import VoteCountSlider from './slider/VoteCountSlider';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,13 @@ const Filter = () => {
 
           <AccordionHolder>
             <AccordionPanel>
-              <SliderController />
+              <VoteCountSlider />
+            </AccordionPanel>
+          </AccordionHolder>
+
+          <AccordionHolder>
+            <AccordionPanel>
+              <VoteAveragedSlider />
             </AccordionPanel>
           </AccordionHolder>
 

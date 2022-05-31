@@ -1,8 +1,7 @@
 import { Box, chakra, useCheckbox, useColorModeValue } from '@chakra-ui/react';
 
 const CheckBox = props => {
-  const { state, getCheckboxProps, getInputProps, htmlProps } =
-    useCheckbox(props);
+  const { getCheckboxProps, getInputProps, htmlProps } = useCheckbox(props);
 
   const backgroundColor = useColorModeValue('teal.500', 'teal.600');
 

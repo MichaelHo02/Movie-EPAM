@@ -1,7 +1,6 @@
 import { Box, Flex, Text, useCheckboxGroup } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import tvShowsAPI from '../../../api/services/tvShowsAPI';
 import { updateGenres } from '../../../redux/slices/filterSlice';
 import { fetchGenre } from '../../../redux/slices/genreSlice';
 import CheckBox from './CheckBox';
@@ -25,7 +24,7 @@ const GenresController = () => {
       </Text>
       <Flex flexWrap={'wrap'} gap={4} paddingY={4}>
         {genreList.map((genre, index) => {
-          const checkbox = getCheckboxProps({ value: genre.name });
+          const checkbox = getCheckboxProps({ value: genre.id });
           return (
             <CheckBox key={index} {...checkbox}>
               {genre.name}

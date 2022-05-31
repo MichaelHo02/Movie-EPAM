@@ -1,17 +1,16 @@
 import {
   Box,
-  Text,
   RangeSlider,
-  RangeSliderTrack,
   RangeSliderFilledTrack,
-  RangeSliderThumb,
   RangeSliderMark,
+  RangeSliderThumb,
+  RangeSliderTrack,
+  Text,
   Tooltip,
-  useRangeSlider,
 } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateRuntimes } from '../../../redux/slices/filterSlice';
+import { updateRuntimes } from '../../../../redux/slices/filterSlice';
 
 const RunTimeSlider = () => {
   const [sliderValueLeft, setSliderValueLeft] = useState(50);
@@ -26,7 +25,7 @@ const RunTimeSlider = () => {
         'with_runtime.lte': sliderValueRight,
       })
     );
-  }, []);
+  }, [dispatch, sliderValueLeft, sliderValueRight]);
 
   return (
     <Box>
@@ -37,9 +36,10 @@ const RunTimeSlider = () => {
         <Tooltip
           bg="teal.500"
           color="white"
-          placement="top"
+          placement={'top'}
           isOpen={showTooltip}
           label={`Runtime from ${sliderValueLeft} to ${sliderValueRight} minutes`}
+          marginBottom={4}
         >
           <RangeSlider
             defaultValue={[50, 350]}
@@ -64,19 +64,19 @@ const RunTimeSlider = () => {
               setShowTooltip(false);
             }}
           >
-            <RangeSliderMark value={0} mt="2" ml="-1" fontSize="sm">
+            <RangeSliderMark value={0} mt="4" ml="-1" fontSize="sm">
               0
             </RangeSliderMark>
-            <RangeSliderMark value={100} mt="2" ml="-2.5" fontSize="sm">
+            <RangeSliderMark value={100} mt="4" ml="-2.5" fontSize="sm">
               100
             </RangeSliderMark>
-            <RangeSliderMark value={200} mt="2" ml="-2.5" fontSize="sm">
+            <RangeSliderMark value={200} mt="4" ml="-2.5" fontSize="sm">
               200
             </RangeSliderMark>
-            <RangeSliderMark value={300} mt="2" ml="-2.5" fontSize="sm">
+            <RangeSliderMark value={300} mt="4" ml="-2.5" fontSize="sm">
               300
             </RangeSliderMark>
-            <RangeSliderMark value={400} mt="2" ml="-2.5" fontSize="sm">
+            <RangeSliderMark value={400} mt="4" ml="-2.5" fontSize="sm">
               400
             </RangeSliderMark>
             <RangeSliderTrack bg={'gray.400'}>

@@ -6,16 +6,23 @@ const filterSlice = createSlice({
   initialState: {
     status: 'idle',
     data: {
-      'air_date.gte': '',
-      'air_date.lte': '',
-      with_genres: [],
-      'vote_count.gte': 0,
-      'with_runtime.gte': 0,
-      'with_runtime.lte': 0,
+      'air_date.gte': null,
+      'air_date.lte': null,
+      with_genres: null,
+      'vote_average.gte': null,
+      'vote_count.gte': null,
+      'with_runtime.gte': null,
+      'with_runtime.lte': null,
     },
     response: {
       success: null,
       message: '',
+    },
+    pagination: {
+      page: null,
+      total_pages: null,
+      total_results: null,
+      results: null,
     },
   },
   reducers: {
@@ -31,6 +38,9 @@ const filterSlice = createSlice({
     updateVoteCount: (state, action) => {
       state.data['vote_count.gte'] = action.payload;
     },
+    updateVoteAvg: (state, action) => {
+      state.data['vote_average.gte'] = action.payload;
+    },
     updateRuntimes: (state, action) => {
       state.data['with_runtime.gte'] = action.payload['with_runtime.gte'];
       state.data['with_runtime.lte'] = action.payload['with_runtime.lte'];
@@ -43,9 +53,14 @@ const filterSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchTV.pending, (state, action) => {
-      state.status = 'pending';
-    });
+    builder
+      .addCase(fetchTV.pending, (state, action) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchTV.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.pagination = action.payload;
+      });
   },
 });
 
@@ -54,6 +69,7 @@ export const {
   updateAirDateLTE,
   updateGenres,
   updateVoteCount,
+  updateVoteAvg,
   updateRuntimesGTE,
   updateRuntimesLTE,
   updateRuntimes,
@@ -62,8 +78,13 @@ export const {
 export const fetchTV = createAsyncThunk(
   'filter/fetch',
   async (tmp, thunkAPI) => {
-    console.log(thunkAPI.getState().filterInfo.data);
-    // const res = await tvShowsAPI.getTvShows();
+    const thunkData = thunkAPI.getState().filterInfo.data;
+    const data = {
+      ...thunkData,
+      with_genres: thunkData.with_genres.toString(),
+    };
+    const res = await tvShowsAPI.getTvShows(data);
+    return res.data;
   }
 );
 

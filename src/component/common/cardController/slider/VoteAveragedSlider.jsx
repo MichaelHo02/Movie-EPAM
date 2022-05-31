@@ -1,60 +1,63 @@
 import {
   Box,
+  Text,
+  Tooltip,
   Slider,
   SliderMark,
-  Text,
   SliderTrack,
   SliderFilledTrack,
-  Tooltip,
   SliderThumb,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateVoteCount } from '../../../redux/slices/filterSlice';
+import { updateVoteAvg } from '../../../../redux/slices/filterSlice';
 
-const SliderController = () => {
-  const [sliderValue, setSliderValue] = useState(50);
+const VoteAveragedSlider = () => {
+  const [sliderValue, setSliderValue] = useState(5);
   const [showTooltip, setShowTooltip] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateVoteCount(sliderValue));
-  }, []);
+    dispatch(updateVoteAvg(sliderValue));
+  }, [dispatch, sliderValue]);
 
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
-        Average Vote:
+        Average Score:
       </Text>
       <Box padding={4}>
         <Slider
           id="slider"
-          defaultValue={50}
+          defaultValue={5}
           min={0}
-          max={500}
-          step={5}
+          max={10}
+          step={1}
           colorScheme="teal"
           onChange={v => {
             setSliderValue(v);
-            dispatch(updateVoteCount(v));
+            dispatch(updateVoteAvg(v));
           }}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >
-          <SliderMark value={0} mt="2" ml="-1" fontSize="sm">
+          <SliderMark value={0} mt="4" ml="-1" fontSize="sm">
             0
           </SliderMark>
-          <SliderMark value={125} mt="2" ml="-2.5" fontSize="sm">
-            125
+          <SliderMark value={2} mt="4" ml="-1" fontSize="sm">
+            2
           </SliderMark>
-          <SliderMark value={250} mt="2" ml="-2.5" fontSize="sm">
-            250
+          <SliderMark value={4} mt="4" ml="-1" fontSize="sm">
+            4
           </SliderMark>
-          <SliderMark value={375} mt="2" ml="-2.5" fontSize="sm">
-            375
+          <SliderMark value={6} mt="4" ml="-1" fontSize="sm">
+            6
           </SliderMark>
-          <SliderMark value={500} mt="2" ml="-2.5" fontSize="sm">
-            500
+          <SliderMark value={8} mt="4" ml="-1" fontSize="sm">
+            8
+          </SliderMark>
+          <SliderMark value={10} mt="4" ml="-1" fontSize="sm">
+            10
           </SliderMark>
           <SliderTrack bgColor={'gray.400'}>
             <SliderFilledTrack />
@@ -64,7 +67,7 @@ const SliderController = () => {
             color="white"
             placement="top"
             isOpen={showTooltip}
-            label={`At least ${sliderValue} votes`}
+            label={`At least ${sliderValue} score`}
           >
             <SliderThumb boxSize={6} />
           </Tooltip>
@@ -74,4 +77,4 @@ const SliderController = () => {
   );
 };
 
-export default SliderController;
+export default VoteAveragedSlider;
