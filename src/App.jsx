@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, theme } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, theme } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import Footer from './component/common/footer/Footer';
 import Header from './component/common/header/Header';
@@ -6,11 +6,13 @@ import Header from './component/common/header/Header';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box marginX={10} marginY={5}>
+      <Flex marginX={10} marginY={5} flexDirection={'column'}>
         <Header />
-        <Outlet />
+        <Box flex={1}>
+          <Outlet />
+        </Box>
         <Footer />
-      </Box>
+      </Flex>
     </ChakraProvider>
   );
 }

@@ -24,7 +24,7 @@ const Filter = () => {
 
   return (
     <>
-      <Accordion defaultIndex={[0]} allowMultiple>
+      <Accordion allowMultiple>
         <AccordionItem marginY={8} border={'none'}>
           <AccordionHolder>
             <AccordionButton borderRadius={'inherit'}>

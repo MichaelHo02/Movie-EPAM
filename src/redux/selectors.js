@@ -4,3 +4,5 @@ export const getSignUpPassword = state => state.authInfo.data.password;
 export const getResponse = state => state.authInfo.response;
 
 export const getGenresInfo = state => state.genreInfo;
+
+export const getFilmInfo = state => state.filterInfo.pagination;
