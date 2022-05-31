@@ -49,7 +49,6 @@ const SliderController = () => {
             <SliderFilledTrack />
           </SliderTrack>
           <Tooltip
-            hasArrow
             bg="teal.500"
             color="white"
             placement="top"

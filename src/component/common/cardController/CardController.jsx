@@ -4,17 +4,16 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
+  Button,
   Heading,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import AccordionHolder from './AccordionHolder';
+import AirDateController from './AirDateController';
 import GenresController from './GenresController';
 import RunTimeSlider from './RunTimeSlider';
 import SliderController from './SliderController';
 
 const Filter = () => {
-  const backgroundColor = useColorModeValue('gray.200', 'gray.600');
   return (
     <>
       <Accordion defaultIndex={[0]} allowMultiple>
@@ -40,6 +39,19 @@ const Filter = () => {
           <AccordionHolder>
             <AccordionPanel>
               <RunTimeSlider />
+            </AccordionPanel>
+          </AccordionHolder>
+
+          <AccordionHolder>
+            <AccordionPanel>
+              <AirDateController />
+            </AccordionPanel>
+          </AccordionHolder>
+          <AccordionHolder>
+            <AccordionPanel>
+              <Button marginTop={2} width={'full'} colorScheme={'orange'}>
+                Submit
+              </Button>
             </AccordionPanel>
           </AccordionHolder>
         </AccordionItem>

@@ -14,7 +14,7 @@ import { useRef, useState } from 'react';
 const RunTimeSlider = () => {
   const [sliderValueLeft, setSliderValueLeft] = useState(50);
   const [sliderValueRight, setSliderValueRight] = useState(350);
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
   return (
     <Box>
       <Text fontSize={'xl'} fontWeight={'bold'}>
