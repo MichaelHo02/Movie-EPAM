@@ -2,10 +2,20 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { forwardRef, useState } from 'react';
 import DatePicker, { CalendarContainer } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from 'react-redux';
+import {
+  updateAirDateGTE,
+  updateAirDateLTE,
+} from '../../../redux/slices/filterSlice';
 
 const AirDateController = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [startDate, setStartDate] = useState(today);
+  const [endDate, setEndDate] = useState(today);
+
+  const dispatch = useDispatch();
+
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <Button
       onClick={onClick}
@@ -29,7 +39,14 @@ const AirDateController = () => {
     );
   };
 
-  console.log(startDate.toISOString(), endDate.toISOString);
+  const handleOffsetTime = date =>
+    new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+
+  const handleSetDate = (date, setStateCallback, dispatchCallbacks) => {
+    date = handleOffsetTime(date);
+    setStateCallback(date);
+    dispatch(dispatchCallbacks(date.toISOString()));
+  };
 
   return (
     <Box>
@@ -40,17 +57,25 @@ const AirDateController = () => {
         <Box width={'full'}>
           <DatePicker
             selected={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={date =>
+              handleSetDate(date, setStartDate, updateAirDateGTE)
+            }
             customInput={<CustomInput />}
             calendarContainer={CustomCalendarContainer}
+            maxDate={endDate}
+            dateFormat={'yyyy-MM-dd'}
           />
         </Box>
         <Box width={'full'}>
           <DatePicker
             selected={endDate}
-            onChange={date => setEndDate(date)}
+            onChange={date =>
+              handleSetDate(date, setStartDate, updateAirDateLTE)
+            }
             customInput={<CustomInput />}
             calendarContainer={CustomCalendarContainer}
+            minDate={startDate}
+            dateFormat={'yyyy-MM-dd'}
           />
         </Box>
       </Flex>

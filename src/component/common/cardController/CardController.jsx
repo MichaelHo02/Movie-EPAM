@@ -20,8 +20,8 @@ const Filter = () => {
         <AccordionItem marginY={8} border={'none'}>
           <AccordionHolder>
             <AccordionButton borderRadius={'inherit'}>
-              <Heading flex={1} textAlign={'left'}>
-                Filter
+              <Heading flex={1} textAlign={'left'} fontSize={'3xl'}>
+                Filter & Sorting
               </Heading>
               <AccordionIcon />
             </AccordionButton>

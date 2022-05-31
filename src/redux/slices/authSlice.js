@@ -76,7 +76,7 @@ export const register = createAsyncThunk('auth/register', async user => {
 });
 
 export const login = createAsyncThunk('auth/login', async user => {
-  const res = await userAPI.login(JSON.stringify(user));
+  const res = await userAPI.in(JSON.stringify(user));
   console.log(res);
   return res.data;
 });
