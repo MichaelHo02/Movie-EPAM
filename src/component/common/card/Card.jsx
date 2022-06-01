@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
+import { useReducer, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
@@ -25,23 +26,35 @@ const Card = ({
   popularity,
   origin_country,
 }) => {
-  const backgroundColor = useColorModeValue('gray.200', 'gray.700');
-  const voteCountColor =
-    vote_count < 100
-      ? 'red'
-      : vote_count < 200
-      ? 'yellow'
-      : vote_count < 300
-      ? 'green'
-      : 'purple';
-  const voteAvgColor =
-    vote_average < 5 ? 'red' : vote_average < 8 ? 'green' : 'purple';
+  const [statusLike, setStatusLike] = useState(false);
+  const [statusFavorite, setStatusFavorite] = useState(false);
 
-  const popularityColor =
-    popularity < 500 ? 'red' : popularity < 1000 ? 'green' : 'purple';
+  const bgLikeColor = useColorModeValue(
+    statusLike ? 'teal.200' : 'gray.200',
+    statusLike ? 'teal.700' : 'gray.700'
+  );
+  const bgFavoriteColor = useColorModeValue(
+    statusFavorite ? 'orange.200' : 'gray.200',
+    statusFavorite ? 'orange.700' : 'gray.700'
+  );
+
+  const backgroundColor = useColorModeValue('gray.200', 'gray.700');
+
+  const voteCountColor = findVoteCountColor(vote_count);
+  const voteAvgColor = findVoteAvgColor(vote_average);
+  const popularityColor = findPopularityColor(popularity);
+
+  const gradient = `linear(to-br, ${bgFavoriteColor} 0%, ${backgroundColor} 40%, ${backgroundColor} 60%, ${bgLikeColor} 90%)`;
+
+  const handleLike = e => {
+    setStatusLike(!statusLike);
+  };
+  const handleFavorite = () => {
+    setStatusFavorite(!statusFavorite);
+  };
   return (
     <Flex
-      backgroundColor={backgroundColor}
+      bgGradient={gradient}
       borderRadius={'md'}
       boxShadow={'md'}
       padding={4}
@@ -59,14 +72,12 @@ const Card = ({
           flex={1}
           justifyContent={'space-between'}
           gap={2}
-          // width={'60%'}
         >
           <Image
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
             alt={'poster'}
             borderRadius={'base'}
             boxShadow={'md'}
-            // width={'full'}
             htmlWidth={'full'}
           />
           <Badge
@@ -148,6 +159,8 @@ const Card = ({
                 icon={<BiLike />}
                 colorScheme={'teal'}
                 boxShadow={'md'}
+                variant={statusLike ? 'solid' : 'outline'}
+                onClick={handleLike}
               />
             </CustomizeTooltip>
             <CustomizeTooltip message={'Add to favorite list'}>
@@ -155,6 +168,8 @@ const Card = ({
                 icon={<StarIcon />}
                 colorScheme={'orange'}
                 boxShadow={'md'}
+                variant={statusFavorite ? 'solid' : 'outline'}
+                onClick={handleFavorite}
               />
             </CustomizeTooltip>
           </ButtonGroup>
@@ -170,6 +185,8 @@ const Card = ({
                 base: 'none',
               }}
               boxShadow={'md'}
+              variant={statusLike ? 'solid' : 'outline'}
+              onClick={handleLike}
             >
               Like
             </Button>
@@ -186,6 +203,8 @@ const Card = ({
                 base: 'none',
               }}
               boxShadow={'md'}
+              variant={statusFavorite ? 'solid' : 'outline'}
+              onClick={handleFavorite}
             >
               Favorite
             </Button>
@@ -197,3 +216,18 @@ const Card = ({
 };
 
 export default Card;
+
+const findVoteCountColor = value =>
+  value < 100
+    ? 'red'
+    : value < 200
+    ? 'yellow'
+    : value < 300
+    ? 'green'
+    : 'purple';
+
+const findVoteAvgColor = value =>
+  value < 5 ? 'red' : value < 8 ? 'green' : 'purple';
+
+const findPopularityColor = value =>
+  value < 500 ? 'red' : value < 1000 ? 'green' : 'purple';
