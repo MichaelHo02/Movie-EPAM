@@ -21,7 +21,7 @@ const filterSlice = createSlice({
     },
     pagination: {
       page: 1,
-      total_pages: null,
+      total_pages: 1,
       total_results: null,
       results: null,
     },

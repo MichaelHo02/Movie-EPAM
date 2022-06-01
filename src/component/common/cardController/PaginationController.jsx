@@ -16,7 +16,7 @@ import { fetchTV } from '../../../redux/slices/filterSlice';
 const PaginationController = () => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.700');
   const dispatch = useDispatch();
-  const selector = useSelector(getFilterInfo);
+  const selector = useSelector(getFilterInfo).pagination;
   return (
     <Flex
       marginY={4}
