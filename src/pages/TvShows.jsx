@@ -11,11 +11,7 @@ const TvShows = () => {
   const dispatch = useDispatch();
   const filterInfo = useSelector(getFilterInfo);
   const filmInfo = useSelector(getFilmInfo);
-  console.log(filterInfo);
-  console.log(filmInfo);
   useEffect(() => {
-    console.log('[filterInfo]', filterInfo.status);
-    console.log('[filmInfo]', filmInfo.status);
     if (filterInfo.status === 'idle') {
       dispatch(fetchLikesAndFavorites());
     }

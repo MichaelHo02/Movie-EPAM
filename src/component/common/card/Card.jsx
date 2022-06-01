@@ -16,6 +16,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import {
+  removeFavorites,
   removeLikes,
   updateFavorites,
   updateLikes,
@@ -72,7 +73,11 @@ const Card = ({
   };
   const handleFavorite = () => {
     setStatusFavorite(!statusFavorite);
-    dispatch(updateFavorites({ id, variant }));
+    if (!statusFavorite === true) {
+      dispatch(updateFavorites({ id, variant }));
+    } else {
+      dispatch(removeFavorites({ id, variant }));
+    }
   };
   return (
     <Flex
