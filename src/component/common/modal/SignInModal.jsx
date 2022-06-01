@@ -61,7 +61,6 @@ const SignInModal = ({ isOpen, onClose }) => {
         duration: 3000,
         isClosable: true,
       });
-      localStorage.setItem('auth_WeWatch', '123456789');
       formik.resetForm();
       onClose();
       navigate('home');

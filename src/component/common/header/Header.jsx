@@ -116,7 +116,6 @@ const Header = () => {
       colorScheme={'orange'}
       onClick={() => {
         dispatch(clearUser());
-        localStorage.removeItem('auth_WeWatch');
         navigate('/');
       }}
     >

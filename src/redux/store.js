@@ -12,19 +12,11 @@ import {
 import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducer';
 
-// const store = configureStore({
-//   reducer: {
-//     authInfo: authSlice,
-//     genreInfo: genreSlice,
-//     filterInfo: filterSlice,
-//     filmInfo: filmSlide,
-//   },
-// });
-
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
+  whitelist: ['authInfo'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

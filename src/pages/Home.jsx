@@ -1,11 +1,6 @@
-import Authentication from '../component/common/auth/Authentication';
 
 const Home = () => {
-  return (
-    <Authentication>
-      <div>Home</div>
-    </Authentication>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;
