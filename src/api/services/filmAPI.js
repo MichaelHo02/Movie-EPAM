@@ -1,9 +1,9 @@
 import axiosPrivate from '../axiosPrivate';
 
 const filmAPI = {
-  getFilms: () => {
-    const url = `/films/likes`;
-    return axiosPrivate.get(url);
+  getFilms: params => {
+    const url = `/films`;
+    return axiosPrivate.get(url, { params });
   },
   addLikeFilmTo: (body, params) => {
     const url = `/films`;

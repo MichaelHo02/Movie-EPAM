@@ -12,7 +12,7 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { updateFavorites, updateLikes } from '../../../redux/slices/filmSlide';
@@ -29,10 +29,17 @@ const Card = ({
   popularity,
   origin_country,
   variant,
+  currentStatusLike,
+  currentStatusFavorite,
 }) => {
   const [statusLike, setStatusLike] = useState(false);
   const [statusFavorite, setStatusFavorite] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setStatusLike(currentStatusLike);
+    setStatusFavorite(currentStatusFavorite);
+  }, [currentStatusFavorite, currentStatusLike]);
 
   const bgLikeColor = useColorModeValue(
     statusLike ? 'teal.200' : 'gray.200',

@@ -62,7 +62,7 @@ const filterSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchTV.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = 'fulfilled';
         state.pagination = action.payload;
       });
   },

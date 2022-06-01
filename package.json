@@ -23,6 +23,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "use-deep-compare-effect": "^1.8.1",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.11",
     "yup-password": "^0.2.2"

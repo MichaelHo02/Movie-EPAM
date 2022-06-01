@@ -5,4 +5,6 @@ export const getResponse = state => state.authInfo.response;
 
 export const getGenresInfo = state => state.genreInfo;
 
-export const getFilmInfo = state => state.filterInfo.pagination;
+export const getFilmInfo = state => state.filmInfo;
+
+export const getFilterInfo = state => state.filterInfo;

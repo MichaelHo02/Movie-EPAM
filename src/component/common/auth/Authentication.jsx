@@ -6,7 +6,6 @@ import { getResponse } from '../../../redux/selectors';
 const Authentication = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
   const validation = useSelector(getResponse).success;
   useEffect(() => {
     if (!validation) {

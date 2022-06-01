@@ -8,7 +8,9 @@ const filmSlide = createSlice({
   initialState: {
     status: 'idle',
     data: {
+      likesId: {},
       likes: [],
+      favoritesId: {},
       favorites: [],
     },
     response: {
@@ -30,8 +32,21 @@ const filmSlide = createSlice({
         state.status = 'pending';
       })
       .addCase(updateLikes.fulfilled, (state, action) => {
-        state.status = 'idle';
-        console.log(action.payload);
+        state.status = 'fulfilled';
+        state.data.likes = action.payload;
+        const json = {};
+        action.payload.forEach(({ id }) => (json[id] = true));
+        state.data.likesId = json;
+      })
+      .addCase(fetchLikesAndFavorites.pending, (state, action) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchLikesAndFavorites.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.data.likes = action.payload.likes;
+        const jsonLikes = {};
+        action.payload.likes.forEach(({ id }) => (jsonLikes[id] = true));
+        state.data.likesId = jsonLikes;
       });
   },
 });
@@ -42,22 +57,30 @@ export const updateLikes = createAsyncThunk(
   'film/likes',
   async ({ id, variant }, thunkAPI) => {
     let film = await (variant === 'tv' ? tvShowsAPI.getTvShow(id) : null);
-    console.log(film.data);
     const genres = film.data.genres.map(genre => genre.name);
     film.data = { ...film.data, genres };
     const name = getSignUpUsername(thunkAPI.getState());
-    console.log(name);
     const res = await filmAPI.addLikeFilmTo(film.data, {
       name: name,
       variant: variant,
       type: 'like',
     });
+    return res.data;
   }
 );
 
 export const updateFavorites = createAsyncThunk(
   'film/favorites',
   async (id, thunkAPI) => {}
+);
+
+export const fetchLikesAndFavorites = createAsyncThunk(
+  'film/fetchLikesAndFavorites',
+  async (param, thunkAPI) => {
+    const name = getSignUpUsername(thunkAPI.getState());
+    const res = await filmAPI.getFilms({ name });
+    return res.data;
+  }
 );
 
 export const fetchLikes = createAsyncThunk();

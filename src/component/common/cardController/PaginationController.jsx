@@ -10,13 +10,13 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilmInfo } from '../../../redux/selectors';
+import { getFilterInfo } from '../../../redux/selectors';
 import { fetchTV } from '../../../redux/slices/filterSlice';
 
 const PaginationController = () => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.700');
   const dispatch = useDispatch();
-  const selector = useSelector(getFilmInfo);
+  const selector = useSelector(getFilterInfo);
   return (
     <Flex
       marginY={4}
