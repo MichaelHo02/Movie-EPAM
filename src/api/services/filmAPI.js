@@ -9,6 +9,10 @@ const filmAPI = {
     const url = `/films`;
     return axiosPrivate.post(url, body, { params });
   },
+  removeLikeFilmFrom: (id, params) => {
+    const url = `/films/${id}`;
+    return axiosPrivate.delete(url, { params });
+  },
 };
 
 export default filmAPI;

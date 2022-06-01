@@ -69,6 +69,19 @@ export const updateLikes = createAsyncThunk(
   }
 );
 
+export const removeLikes = createAsyncThunk(
+  'film/unlinkes',
+  async ({ id, variant }, thunkAPI) => {
+    const name = getSignUpUsername(thunkAPI.getState());
+    const res = await filmAPI.removeLikeFilmFrom(id, {
+      name: name,
+      variant: variant,
+      type: 'like',
+    });
+    return res.data;
+  }
+);
+
 export const updateFavorites = createAsyncThunk(
   'film/favorites',
   async (id, thunkAPI) => {}

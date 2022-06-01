@@ -15,7 +15,11 @@ import {
 import { useEffect, useReducer, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
-import { updateFavorites, updateLikes } from '../../../redux/slices/filmSlide';
+import {
+  removeLikes,
+  updateFavorites,
+  updateLikes,
+} from '../../../redux/slices/filmSlide';
 
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 
@@ -60,7 +64,11 @@ const Card = ({
 
   const handleLike = e => {
     setStatusLike(!statusLike);
-    dispatch(updateLikes({ id, variant }));
+    if (!statusLike === true) {
+      dispatch(updateLikes({ id, variant }));
+    } else {
+      dispatch(removeLikes({ id, variant }));
+    }
   };
   const handleFavorite = () => {
     setStatusFavorite(!statusFavorite);
