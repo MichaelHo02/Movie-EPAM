@@ -14,13 +14,9 @@ const TvShows = () => {
   const filterInfo = useSelector(getFilterInfo);
   const filmInfo = useSelector(getFilmInfo);
   useEffect(() => {
-    if (filterInfo.status === 'idle') {
-      dispatch(fetchLikesAndFavorites());
-    }
-    if (filmInfo.status === 'idle') {
-      dispatch(fetchTV());
-    }
-  }, [dispatch, filmInfo.status, filterInfo.status]);
+    dispatch(fetchLikesAndFavorites());
+    dispatch(fetchTV());
+  }, [dispatch]);
 
   return (
     <Box marginBottom={10}>

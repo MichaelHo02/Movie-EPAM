@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import filmAPI from '../../api/services/filmAPI';
+import moviesAPI from '../../api/services/movieAPI';
 import tvShowsAPI from '../../api/services/tvShowsAPI';
 import { getSignUpEmail, getSignUpUsername } from '../selectors';
 
@@ -86,16 +87,21 @@ export const { setLikes, setFavorites } = filmSlide.actions;
 export const updateLikes = createAsyncThunk(
   'film/likes',
   async ({ id, variant }, thunkAPI) => {
-    let film = await (variant === 'tv' ? tvShowsAPI.getTvShow(id) : null);
+    let film = await (variant === 'tv'
+      ? tvShowsAPI.getTvShow(id)
+      : moviesAPI.getMovie(id));
     const genres = film.data.genres.map(genre => genre.name);
     film.data = { ...film.data, genres };
     const name = getSignUpUsername(thunkAPI.getState());
     console.log('first');
-    const res = await filmAPI.addLikeFilmTo(film.data, {
-      name: name,
-      variant: variant,
-      type: 'like',
-    });
+    const res = await filmAPI.addLikeFilmTo(
+      { ...film.data, name: film.data.title },
+      {
+        name: name,
+        variant: variant,
+        type: 'like',
+      }
+    );
     console.log('seconds');
 
     console.log('[res]', res.data);
@@ -119,15 +125,20 @@ export const removeLikes = createAsyncThunk(
 export const updateFavorites = createAsyncThunk(
   'film/favorites',
   async ({ id, variant }, thunkAPI) => {
-    let film = await (variant === 'tv' ? tvShowsAPI.getTvShow(id) : null);
+    let film = await (variant === 'tv'
+      ? tvShowsAPI.getTvShow(id)
+      : moviesAPI.getMovie(id));
     const genres = film.data.genres.map(genre => genre.name);
     film.data = { ...film.data, genres };
     const name = getSignUpUsername(thunkAPI.getState());
-    const res = await filmAPI.addLikeFilmTo(film.data, {
-      name: name,
-      variant: variant,
-      type: 'favorite',
-    });
+    const res = await filmAPI.addLikeFilmTo(
+      { ...film.data, name: film.data.title },
+      {
+        name: name,
+        variant: variant,
+        type: 'favorite',
+      }
+    );
     return res.data;
   }
 );

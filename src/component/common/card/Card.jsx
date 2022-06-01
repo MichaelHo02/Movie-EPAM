@@ -164,7 +164,7 @@ const Card = ({
             </Badge>
           </CustomizeTooltip>
 
-          {country.length !== 0 && (
+          {country && country.length !== 0 && (
             <CustomizeTooltip message={countryDesc}>
               <Badge
                 textAlign={'center'}

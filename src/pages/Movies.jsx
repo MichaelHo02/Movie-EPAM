@@ -14,13 +14,9 @@ const Movies = () => {
   const filmInfo = useSelector(getFilmInfo);
 
   useEffect(() => {
-    if (filterInfo.status === 'idle') {
-      dispatch(fetchLikesAndFavorites());
-    }
-    if (filmInfo.status === 'idle') {
-      dispatch(fetchMovie());
-    }
-  }, [dispatch, filmInfo.status, filterInfo.status]);
+    dispatch(fetchLikesAndFavorites());
+    dispatch(fetchMovie());
+  }, [dispatch]);
   console.log(filmInfo);
   return (
     <Box marginBottom={10}>
