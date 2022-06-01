@@ -32,7 +32,8 @@ const Card = ({
   vote_average,
   vote_count,
   popularity,
-  origin_country,
+  country,
+  countryDesc,
   variant,
   currentStatusLike,
   currentStatusFavorite,
@@ -163,8 +164,8 @@ const Card = ({
             </Badge>
           </CustomizeTooltip>
 
-          {origin_country.length !== 0 && (
-            <CustomizeTooltip message={'Origin Country'}>
+          {country.length !== 0 && (
+            <CustomizeTooltip message={countryDesc}>
               <Badge
                 textAlign={'center'}
                 fontSize={'lg'}
@@ -174,7 +175,7 @@ const Card = ({
                 borderRadius={'lg'}
                 boxShadow={'md'}
               >
-                {origin_country.toString()}
+                {country.toString()}
               </Badge>
             </CustomizeTooltip>
           )}

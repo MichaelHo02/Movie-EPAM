@@ -14,6 +14,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import Movies from './pages/Movies';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
@@ -32,6 +33,7 @@ root.render(
               <Route path="home" element={<Home />} />
               <Route path="favorite" element={<Favorite />} />
               <Route path="tv-shows" element={<TvShows />} />
+              <Route path="movies" element={<Movies />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

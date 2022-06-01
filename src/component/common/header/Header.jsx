@@ -52,7 +52,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const navBar = navBarList.map((nav, idx) => (
-    <NavigateButton key={idx} {...nav} />
+    <NavigateButton key={idx} {...nav} hamOnClose={hamOnClose} />
   ));
 
   const btnSignIn = (

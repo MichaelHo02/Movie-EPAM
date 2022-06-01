@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-const NavigateButton = ({ path, title }) => {
+const NavigateButton = ({ path, title, hamOnClose }) => {
   return (
     <NavLink to={path}>
       {({ isActive }) => (
@@ -11,6 +11,7 @@ const NavigateButton = ({ path, title }) => {
           variant={'ghost'}
           isActive={isActive}
           width={'100%'}
+          onClick={() => hamOnClose()}
         >
           {title}
         </Button>

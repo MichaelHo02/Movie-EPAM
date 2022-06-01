@@ -3,7 +3,7 @@ import { fetchTV } from '../../../redux/slices/filterSlice';
 import FilterController from './FilterController';
 import PaginationController from './PaginationController';
 
-const Filter = () => {
+const CardController = () => {
   return (
     <>
       <FilterController />
@@ -12,4 +12,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default CardController;

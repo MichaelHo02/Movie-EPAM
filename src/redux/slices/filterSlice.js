@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import moviesAPI from '../../api/services/movieAPI';
 import tvShowsAPI from '../../api/services/tvShowsAPI';
 
 const filterSlice = createSlice({
@@ -64,6 +65,13 @@ const filterSlice = createSlice({
       .addCase(fetchTV.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.pagination = action.payload;
+      })
+      .addCase(fetchMovie.pending, (state, action) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchMovie.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.pagination = action.payload;
       });
   },
 });
@@ -81,17 +89,37 @@ export const {
 } = filterSlice.actions;
 
 export const fetchTV = createAsyncThunk(
-  'filter/fetch',
+  'filter/fetchTV',
   async (param, thunkAPI) => {
     const thunkData = thunkAPI.getState().filterInfo.data;
     const currentPage = thunkAPI.getState().filterInfo.pagination.page;
-    param = param && currentPage + param > 0 ? param : 0;
+    const finalPage =
+      param && currentPage + param > 0 ? currentPage + param : 1;
     const data = {
       ...thunkData,
       with_genres: thunkData.with_genres.toString(),
-      page: currentPage + param,
+      page: finalPage,
     };
     const res = await tvShowsAPI.getTvShows(data);
+    return res.data;
+  }
+);
+
+export const fetchMovie = createAsyncThunk(
+  'filter/fetchMovie',
+  async (param, thunkAPI) => {
+    const thunkData = thunkAPI.getState().filterInfo.data;
+    const currentPage = thunkAPI.getState().filterInfo.pagination.page;
+    const finalPage =
+      param && currentPage + param > 0 ? currentPage + param : 1;
+    const data = {
+      ...thunkData,
+      with_genres: thunkData.with_genres.toString(),
+      'release_date.gte': thunkData['air_date.gte'],
+      'release_date.lte': thunkData['air_date.lte'],
+      page: finalPage,
+    };
+    const res = await moviesAPI.getMovies(data);
     return res.data;
   }
 );
