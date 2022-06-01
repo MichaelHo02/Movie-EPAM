@@ -167,8 +167,10 @@ const Card = ({
                 icon={<BiLike />}
                 colorScheme={'teal'}
                 boxShadow={'md'}
-                variant={statusLike ? 'solid' : 'outline'}
                 onClick={handleLike}
+                variant={statusLike ? 'solid' : 'outline'}
+                borderWidth={'1px'}
+                borderColor={statusFavorite ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
             <CustomizeTooltip message={'Add to favorite list'}>
@@ -176,8 +178,10 @@ const Card = ({
                 icon={<StarIcon />}
                 colorScheme={'orange'}
                 boxShadow={'md'}
-                variant={statusFavorite ? 'solid' : 'outline'}
                 onClick={handleFavorite}
+                variant={statusFavorite ? 'solid' : 'outline'}
+                borderWidth={'1px'}
+                borderColor={statusFavorite ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
           </ButtonGroup>
@@ -193,8 +197,10 @@ const Card = ({
                 base: 'none',
               }}
               boxShadow={'md'}
-              variant={statusLike ? 'solid' : 'outline'}
               onClick={handleLike}
+              variant={statusLike ? 'solid' : 'outline'}
+              borderWidth={'1px'}
+              borderColor={statusFavorite ? 'transparent' : 'auto'}
             >
               Like
             </Button>
@@ -213,6 +219,8 @@ const Card = ({
               boxShadow={'md'}
               variant={statusFavorite ? 'solid' : 'outline'}
               onClick={handleFavorite}
+              borderWidth={'1px'}
+              borderColor={statusFavorite ? 'transparent' : 'auto'}
             >
               Favorite
             </Button>
