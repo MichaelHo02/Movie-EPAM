@@ -19,7 +19,7 @@ const VoteAveragedSlider = () => {
 
   useEffect(() => {
     dispatch(updateVoteAvg(sliderValue));
-  }, [dispatch, sliderValue]);
+  }, []);
 
   return (
     <Box>
@@ -36,7 +36,9 @@ const VoteAveragedSlider = () => {
           colorScheme="teal"
           onChange={v => {
             setSliderValue(v);
-            dispatch(updateVoteAvg(v));
+          }}
+          onBlur={() => {
+            dispatch(updateVoteAvg(sliderValue));
           }}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}

@@ -6,7 +6,6 @@ import {
   AccordionPanel,
   Button,
   Heading,
-  Select,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -34,7 +33,7 @@ const FilterController = () => {
     >
       <AccordionItem marginY={8} border={'none'}>
         <AccordionHolder>
-          <AccordionButton borderRadius={'inherit'}>
+          <AccordionButton borderRadius={'inherit'} paddingY={4}>
             <Heading flex={1} textAlign={'left'} fontSize={'3xl'}>
               Filter & Sort
             </Heading>

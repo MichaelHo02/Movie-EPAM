@@ -83,9 +83,9 @@ export const {
 export const fetchTV = createAsyncThunk(
   'filter/fetch',
   async (param, thunkAPI) => {
-    param = param && param > 0 ? param : 0;
     const thunkData = thunkAPI.getState().filterInfo.data;
     const currentPage = thunkAPI.getState().filterInfo.pagination.page;
+    param = param && currentPage + param > 0 ? param : 0;
     const data = {
       ...thunkData,
       with_genres: thunkData.with_genres.toString(),

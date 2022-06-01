@@ -40,6 +40,7 @@ const PaginationController = () => {
           onClick={() => {
             dispatch(fetchTV(-1));
           }}
+          isDisabled={selector.page === 1}
         />
         <IconButton
           icon={<ArrowRightIcon />}
@@ -48,6 +49,7 @@ const PaginationController = () => {
           onClick={() => {
             dispatch(fetchTV(1));
           }}
+          isDisabled={selector.page === selector.total_pages}
         />
       </ButtonGroup>
     </Flex>

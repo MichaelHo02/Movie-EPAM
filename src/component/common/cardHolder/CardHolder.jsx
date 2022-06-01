@@ -10,7 +10,6 @@ const CardHolder = ({ children }) => {
         sm: 'repeat(1, 1fr)',
       }}
       gridGap={5}
-      marginBottom={10}
     >
       {children}
     </Grid>

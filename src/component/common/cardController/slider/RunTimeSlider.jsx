@@ -25,7 +25,7 @@ const RunTimeSlider = () => {
         'with_runtime.lte': sliderValueRight,
       })
     );
-  }, [dispatch, sliderValueLeft, sliderValueRight]);
+  }, []);
 
   return (
     <Box>
@@ -50,10 +50,12 @@ const RunTimeSlider = () => {
             onChange={v => {
               setSliderValueLeft(v[0]);
               setSliderValueRight(v[1]);
+            }}
+            onBlur={() => {
               dispatch(
                 updateRuntimes({
-                  'with_runtime.gte': v[0],
-                  'with_runtime.lte': v[1],
+                  'with_runtime.gte': sliderValueLeft,
+                  'with_runtime.lte': sliderValueRight,
                 })
               );
             }}

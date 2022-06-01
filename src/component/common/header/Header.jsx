@@ -10,11 +10,35 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { clearUser } from '../../../redux/slices/authSlice';
 import Logo from '../../landing/logo/Logo';
 import ColorModeSwitcher from '../button/ColorModeSwitcher';
 import SignInModal from '../modal/SignInModal';
+import NavigateButton from './NavigateButton';
+
+const navBarList = [
+  {
+    path: '/home',
+    title: 'Home',
+  },
+  {
+    path: '/tv-shows',
+    title: 'TV Shows',
+  },
+  {
+    path: '/movies',
+    title: 'Movies',
+  },
+  {
+    path: '/favorite',
+    title: 'Favorite',
+  },
+  {
+    path: '/friends',
+    title: 'Friends',
+  },
+];
 
 const Header = () => {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -26,75 +50,10 @@ const Header = () => {
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navBar = (
-    <>
-      <NavLink to={'/home'}>
-        {({ isActive }) => (
-          <Button
-            size={'md'}
-            fontSize={'lg'}
-            variant={'ghost'}
-            isActive={isActive}
-            width={'100%'}
-          >
-            Home
-          </Button>
-        )}
-      </NavLink>
-      <NavLink to={'/favorite'}>
-        {({ isActive }) => (
-          <Button
-            size={'md'}
-            fontSize={'lg'}
-            variant={'ghost'}
-            isActive={isActive}
-            width={'100%'}
-          >
-            Favorite
-          </Button>
-        )}
-      </NavLink>
-      <NavLink to={'/tv-shows'}>
-        {({ isActive }) => (
-          <Button
-            size={'md'}
-            fontSize={'lg'}
-            variant={'ghost'}
-            isActive={isActive}
-            width={'100%'}
-          >
-            TV Shows
-          </Button>
-        )}
-      </NavLink>
-      <NavLink to={'/movies'}>
-        {({ isActive }) => (
-          <Button
-            size={'md'}
-            fontSize={'lg'}
-            variant={'ghost'}
-            isActive={isActive}
-            width={'100%'}
-          >
-            Movies
-          </Button>
-        )}
-      </NavLink>
-      <NavLink to={'/trending'}>
-        {({ isActive }) => (
-          <Button
-            size={'md'}
-            fontSize={'lg'}
-            variant={'ghost'}
-            isActive={isActive}
-            width={'100%'}
-          >
-            Trending
-          </Button>
-        )}
-      </NavLink>
-    </>
-  );
+
+  const navBar = navBarList.map((nav, idx) => (
+    <NavigateButton key={idx} {...nav} />
+  ));
 
   const btnSignIn = (
     <Button

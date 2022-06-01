@@ -19,7 +19,7 @@ const VoteCountSlider = () => {
 
   useEffect(() => {
     dispatch(updateVoteCount(sliderValue));
-  }, [dispatch, sliderValue]);
+  }, []);
 
   return (
     <Box>
@@ -36,7 +36,9 @@ const VoteCountSlider = () => {
           colorScheme="teal"
           onChange={v => {
             setSliderValue(v);
-            dispatch(updateVoteCount(v));
+          }}
+          onBlur={() => {
+            dispatch(updateVoteCount(sliderValue));
           }}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
