@@ -15,6 +15,11 @@ const tvShowsAPI = {
     const url = `/discover/tv`;
     return axiosPublic.get(url, { params: { ...constParam, ...params } });
   },
+
+  getTvShow: id => {
+    const url = `/tv/${id}`;
+    return axiosPublic.get(url, { params: constParam });
+  },
 };
 
 export default tvShowsAPI;

@@ -12,25 +12,31 @@ import TvShows from './pages/TvShows';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
+const persistor = persistStore(store);
+
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <ColorModeScript />
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="" element={<Landing />} />
-            <Route path="home" element={<Home />} />
-            <Route path="favorite" element={<Favorite />} />
-            <Route path="tv-shows" element={<TvShows />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <ColorModeScript />
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="" element={<Landing />} />
+              <Route path="home" element={<Home />} />
+              <Route path="favorite" element={<Favorite />} />
+              <Route path="tv-shows" element={<TvShows />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </StrictMode>
 );

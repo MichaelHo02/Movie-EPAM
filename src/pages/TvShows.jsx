@@ -13,6 +13,7 @@ const TvShows = () => {
   useEffect(() => {
     dispatch(fetchTV());
   }, [dispatch]);
+  console.log(selector.results);
   return (
     <>
       <Authentication>
@@ -26,6 +27,7 @@ const TvShows = () => {
                   date={card.first_air_date}
                   title={card.name}
                   {...card}
+                  variant={'tv'}
                 />
               );
             })}

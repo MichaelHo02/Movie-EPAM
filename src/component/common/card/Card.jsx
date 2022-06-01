@@ -14,10 +14,13 @@ import {
 } from '@chakra-ui/react';
 import { useReducer, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { updateFavorites, updateLikes } from '../../../redux/slices/filmSlide';
 
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 
 const Card = ({
+  id,
   poster_path,
   date,
   title,
@@ -25,9 +28,11 @@ const Card = ({
   vote_count,
   popularity,
   origin_country,
+  variant,
 }) => {
   const [statusLike, setStatusLike] = useState(false);
   const [statusFavorite, setStatusFavorite] = useState(false);
+  const dispatch = useDispatch();
 
   const bgLikeColor = useColorModeValue(
     statusLike ? 'teal.200' : 'gray.200',
@@ -48,9 +53,11 @@ const Card = ({
 
   const handleLike = e => {
     setStatusLike(!statusLike);
+    dispatch(updateLikes({ id, variant }));
   };
   const handleFavorite = () => {
     setStatusFavorite(!statusFavorite);
+    dispatch(updateFavorites({ id, variant }));
   };
   return (
     <Flex

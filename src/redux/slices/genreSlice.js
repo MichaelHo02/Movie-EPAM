@@ -12,7 +12,7 @@ const genreSlice = createSlice({
     },
   },
   reducers: {
-    getGenre: (state, action) => {
+    setGenre: (state, action) => {
       state.data = action.payload;
     },
   },
@@ -28,7 +28,7 @@ const genreSlice = createSlice({
   },
 });
 
-export const { getGenre } = genreSlice.actions;
+export const { setGenre } = genreSlice.actions;
 
 export const fetchGenre = createAsyncThunk('genre/fetch', async () => {
   const res = await tvShowsAPI.getGenres();
