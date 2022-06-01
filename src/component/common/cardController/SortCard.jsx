@@ -9,7 +9,7 @@ const SortCard = () => {
 
   useEffect(() => {
     dispatch(updateSort(value));
-  }, [dispatch, value]);
+  }, []);
 
   return (
     <Box>
