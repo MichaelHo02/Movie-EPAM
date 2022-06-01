@@ -74,6 +74,7 @@ const Card = ({
           gap={2}
         >
           <Image
+            fallback={<Box textAlign={'center'}>No image available</Box>}
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
             alt={'poster'}
             borderRadius={'base'}
