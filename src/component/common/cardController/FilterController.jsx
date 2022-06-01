@@ -8,6 +8,7 @@ import {
   Heading,
   Select,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchTV } from '../../../redux/slices/filterSlice';
 import AccordionHolder from './AccordionHolder';
@@ -18,12 +19,19 @@ import VoteAveragedSlider from './slider/VoteAveragedSlider';
 import VoteCountSlider from './slider/VoteCountSlider';
 import SortCard from './SortCard';
 const FilterController = () => {
+  const [accordionState, setAccordionState] = useState(false);
+
   const dispatch = useDispatch();
   const handleOnClick = e => {
     dispatch(fetchTV());
+    setAccordionState(false);
   };
   return (
-    <Accordion allowMultiple>
+    <Accordion
+      allowMultiple
+      index={accordionState ? [0] : [-1]}
+      onChange={() => setAccordionState(!accordionState)}
+    >
       <AccordionItem marginY={8} border={'none'}>
         <AccordionHolder>
           <AccordionButton borderRadius={'inherit'}>
