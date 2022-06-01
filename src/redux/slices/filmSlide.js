@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import filmAPI from '../../api/services/filmAPI';
 import tvShowsAPI from '../../api/services/tvShowsAPI';
+import { getSignUpEmail, getSignUpUsername } from '../selectors';
 
 const filmSlide = createSlice({
   name: 'film',
@@ -40,11 +41,17 @@ export const { setLikes, setFavorites } = filmSlide.actions;
 export const updateLikes = createAsyncThunk(
   'film/likes',
   async ({ id, variant }, thunkAPI) => {
-    const film = await (variant === 'tv' ? tvShowsAPI.getTvShow(id) : null);
+    let film = await (variant === 'tv' ? tvShowsAPI.getTvShow(id) : null);
     console.log(film.data);
-    const email = thunkAPI.getState().authInfo;
-    console.log(email);
-    // const res = await filmAPI.addLikeFilmTo();
+    const genres = film.data.genres.map(genre => genre.name);
+    film.data = { ...film.data, genres };
+    const name = getSignUpUsername(thunkAPI.getState());
+    console.log(name);
+    const res = await filmAPI.addLikeFilmTo(film.data, {
+      name: name,
+      variant: variant,
+      type: 'like',
+    });
   }
 );
 

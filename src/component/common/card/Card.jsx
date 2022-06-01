@@ -169,8 +169,7 @@ const Card = ({
                 boxShadow={'md'}
                 onClick={handleLike}
                 variant={statusLike ? 'solid' : 'outline'}
-                borderWidth={'1px'}
-                borderColor={statusFavorite ? 'transparent' : 'auto'}
+                borderColor={statusLike ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
             <CustomizeTooltip message={'Add to favorite list'}>
@@ -200,7 +199,7 @@ const Card = ({
               onClick={handleLike}
               variant={statusLike ? 'solid' : 'outline'}
               borderWidth={'1px'}
-              borderColor={statusFavorite ? 'transparent' : 'auto'}
+              borderColor={statusLike ? 'transparent' : 'auto'}
             >
               Like
             </Button>
