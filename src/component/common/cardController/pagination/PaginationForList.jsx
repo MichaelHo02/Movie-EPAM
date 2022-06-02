@@ -1,18 +1,16 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import { ButtonGroup, Flex, Spacer, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilmInfo } from '../../../../redux/selectors';
 import {
   decrementPage,
-  incrementPage,
+  incrementPage
 } from '../../../../redux/slices/filmSlice';
 import Holder from '../../holder/Holder';
 import PaginationButton from './PaginationButton';
 
-const displayNumber = 10;
-
-const PaginationForList = () => {
+const PaginationForList = ({ displayNumber }) => {
   const dispatch = useDispatch();
   const filmInfo = useSelector(getFilmInfo);
   const films = filmInfo.data.favorites;

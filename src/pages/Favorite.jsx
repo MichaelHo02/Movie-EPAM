@@ -8,9 +8,7 @@ import Holder from '../component/common/holder/Holder';
 import { getFilmInfo } from '../redux/selectors';
 import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
 
-const displayNumber = 10;
-
-const Favorite = () => {
+const Favorite = ({ displayNumber }) => {
   const dispatch = useDispatch();
   const filmInfo = useSelector(getFilmInfo);
   const [page, setPage] = useState(1);
@@ -18,7 +16,6 @@ const Favorite = () => {
     dispatch(fetchLikesAndFavorites());
   }, []);
   const films = filmInfo.data.favorites;
-  const maxPage = Math.floor(films.length / displayNumber) + 1;
   useEffect(() => {
     setPage(filmInfo.data.page);
   }, [filmInfo.data.page]);
