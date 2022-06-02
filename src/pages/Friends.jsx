@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import UserCard from '../component/common/card/UserCard';
 import CardHolder from '../component/common/cardHolder/CardHolder';
 import SearchUser from '../component/friends/SearchUser';
-import { getUsersInfo } from '../redux/selectors';
+import { getSignUpUsername, getUsersInfo } from '../redux/selectors';
 
 const Friends = () => {
   const info = useSelector(getUsersInfo);
+  const username = useSelector(getSignUpUsername);
   console.log(info);
   const [cards, setCards] = useState([]);
   useEffect(() => setCards(info.data.users), [info]);
@@ -16,9 +17,17 @@ const Friends = () => {
       <SearchUser />
       <CardHolder>
         {cards &&
-          cards.map(card => {
-            return <UserCard key={card.username} {...card} />;
-          })}
+          cards
+            .filter(card => card.username !== username)
+            .map(card => {
+              return (
+                <UserCard
+                  key={card.username}
+                  {...card}
+                  currentStatusFriend={info.data.friendsName[card.username]}
+                />
+              );
+            })}
       </CardHolder>
     </Box>
   );

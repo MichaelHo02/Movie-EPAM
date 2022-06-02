@@ -15,8 +15,15 @@ const userAPI = {
   },
   users: params => {
     const url = `/users`;
-    console.log(params);
     return axiosPrivate.get(url, { params });
+  },
+  addFriends: body => {
+    const url = `/users/friends`;
+    return axiosPrivate.post(url, body);
+  },
+  removeFriends: body => {
+    const url = `/users/friends`;
+    return axiosPrivate.put(url, body);
   },
 };
 

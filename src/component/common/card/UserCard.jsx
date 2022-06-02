@@ -13,8 +13,11 @@ import React, { useEffect, useState } from 'react';
 import Avvvatars from 'avvvatars-react';
 import { AddIcon } from '@chakra-ui/icons';
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
+import { useDispatch } from 'react-redux';
+import { addFriends, removeFriends } from '../../../redux/slices/friendSlice';
 
 const UserCard = ({ username, currentStatusFriend }) => {
+  const dispatch = useDispatch();
   const [statusFriend, setStatusFriend] = useState(false);
   useEffect(() => {
     setStatusFriend(currentStatusFriend);
@@ -22,13 +25,16 @@ const UserCard = ({ username, currentStatusFriend }) => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.700');
   const bgFriendColor = useColorModeValue(
     statusFriend ? 'orange.200' : 'gray.200',
-    statusFriend ? 'orange.500' : 'gray.700'
+    statusFriend ? 'orange.700' : 'gray.700'
   );
   const gradient = `linear(to-tl, ${bgFriendColor} 0%, ${backgroundColor} 30%, ${backgroundColor} 100%)`;
 
   const handleAddFriend = () => {
     setStatusFriend(!statusFriend);
     if (!statusFriend === true) {
+      dispatch(addFriends({ friend: username }));
+    } else {
+      dispatch(removeFriends({ friend: username }));
     }
   };
 
