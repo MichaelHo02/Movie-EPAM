@@ -7,6 +7,8 @@ import {
   Flex,
   IconButton,
   Image,
+  LinkBox,
+  LinkOverlay,
   Spacer,
   Text,
   useColorModeValue,
@@ -40,8 +42,17 @@ const Card = ({
 }) => {
   const [statusLike, setStatusLike] = useState(false);
   const [statusFavorite, setStatusFavorite] = useState(false);
-  const [shadowStatus, setShadowStatus] = useState('md');
+  const [shadowStatus, setShadowStatus] = useState(false);
   const dispatch = useDispatch();
+
+  const shadow1 = useColorModeValue(
+    'md',
+    '0 4px 6px -1px rgba(44, 82, 130, 0.1),0 2px 4px -1px rgba(44, 82, 130, 0.06)'
+  );
+  const shadow2 = useColorModeValue(
+    'dark-lg',
+    'rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,rgba(43, 108, 176, 0.2) 0px 5px 10px,rgba(43, 108, 176, 0.4) 0px 15px 40px;'
+  );
 
   useEffect(() => {
     setStatusLike(currentStatusLike);
@@ -82,32 +93,35 @@ const Card = ({
     }
   };
   return (
-    <Link
-      to={{
-        pathname: '/details',
-        search: `?id=${id}`,
-      }}
-    >
+    <LinkBox>
       <Flex
         bgGradient={gradient}
         borderRadius={'md'}
-        boxShadow={shadowStatus}
+        boxShadow={shadowStatus ? shadow2 : shadow1}
         padding={4}
         gap={2}
         flexDirection="column"
         height={'full'}
         justifyContent={'space-between'}
         onMouseEnter={() => {
-          setShadowStatus('dark-lg');
+          setShadowStatus(true);
         }}
         onMouseLeave={() => {
-          setShadowStatus('md');
+          setShadowStatus(false);
         }}
         transition={'0.4s linear'}
       >
-        <Text fontSize={'lg'} fontWeight={'bold'}>
-          {title}
-        </Text>
+        <LinkOverlay
+          as={Link}
+          to={{
+            pathname: '/details',
+            search: `?id=${id}`,
+          }}
+        >
+          <Text fontSize={'lg'} fontWeight={'bold'}>
+            {title}
+          </Text>
+        </LinkOverlay>
         <Flex gap={2} alignContent={'stretch'} height={'full'}>
           <Flex
             flexDirection={'column'}
@@ -269,7 +283,7 @@ const Card = ({
           </Flex>
         </Flex>
       </Flex>
-    </Link>
+    </LinkBox>
   );
 };
 

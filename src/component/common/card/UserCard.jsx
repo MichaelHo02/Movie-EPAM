@@ -66,7 +66,7 @@ const UserCard = ({
       <Spacer />
       {variant !== 'display' && (
         <>
-          <CustomizeTooltip message={'Add friends'}>
+          <CustomizeTooltip message={statusFriend ? 'Unfriend' : 'Make Friend'}>
             <IconButton
               icon={<AddIcon />}
               colorScheme={'orange'}
@@ -83,7 +83,7 @@ const UserCard = ({
               }}
             />
           </CustomizeTooltip>
-          <CustomizeTooltip message={'Add friends'}>
+          <CustomizeTooltip message={statusFriend ? 'Unfriend' : 'Make Friend'}>
             <Button
               leftIcon={<AddIcon />}
               colorScheme={'orange'}
