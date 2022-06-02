@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   removeFavorites,
   removeLikes,
@@ -39,6 +40,7 @@ const Card = ({
 }) => {
   const [statusLike, setStatusLike] = useState(false);
   const [statusFavorite, setStatusFavorite] = useState(false);
+  const [shadowStatus, setShadowStatus] = useState('md');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,180 +82,194 @@ const Card = ({
     }
   };
   return (
-    <Flex
-      bgGradient={gradient}
-      borderRadius={'md'}
-      boxShadow={'md'}
-      padding={4}
-      gap={2}
-      flexDirection="column"
-      height={'full'}
-      justifyContent={'space-between'}
+    <Link
+      to={{
+        pathname: '/details',
+        search: `?id=${id}`,
+      }}
     >
-      <Text fontSize={'lg'} fontWeight={'bold'}>
-        {title}
-      </Text>
-      <Flex gap={2} alignContent={'stretch'} height={'full'}>
-        <Flex
-          flexDirection={'column'}
-          flex={1}
-          justifyContent={'space-between'}
-          gap={2}
-        >
-          <Image
-            fallback={<Box textAlign={'center'}>No image available</Box>}
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
-            alt={'poster'}
-            borderRadius={'base'}
-            boxShadow={'md'}
-            htmlWidth={'full'}
-          />
-          <Badge
-            padding={2}
-            colorScheme={'gray'}
-            textAlign={'center'}
-            fontSize={'md'}
-            fontWeight={'bold'}
+      <Flex
+        bgGradient={gradient}
+        borderRadius={'md'}
+        boxShadow={shadowStatus}
+        padding={4}
+        gap={2}
+        flexDirection="column"
+        height={'full'}
+        justifyContent={'space-between'}
+        onMouseEnter={() => {
+          setShadowStatus('dark-lg');
+        }}
+        onMouseLeave={() => {
+          setShadowStatus('md');
+        }}
+        transition={'0.4s linear'}
+      >
+        <Text fontSize={'lg'} fontWeight={'bold'}>
+          {title}
+        </Text>
+        <Flex gap={2} alignContent={'stretch'} height={'full'}>
+          <Flex
+            flexDirection={'column'}
+            flex={1}
+            justifyContent={'space-between'}
+            gap={2}
           >
-            {new Date(date).toLocaleDateString()}
-          </Badge>
-        </Flex>
-        <Flex flexDirection={'column'} gap={2}>
-          <CustomizeTooltip message={'Number of votes'}>
-            <Badge
-              textAlign={'center'}
-              fontSize={'lg'}
-              variant={'subtle'}
-              padding={2}
-              borderRadius={'lg'}
+            <Image
+              fallback={<Box textAlign={'center'}>No image available</Box>}
+              src={`https://image.tmdb.org/t/p/original${poster_path}`}
+              alt={'poster'}
+              borderRadius={'base'}
               boxShadow={'md'}
-              textTransform={'none'}
-              colorScheme={voteCountColor}
-            >
-              {vote_count}
-            </Badge>
-          </CustomizeTooltip>
-
-          <CustomizeTooltip message={'Rating'}>
+              htmlWidth={'full'}
+            />
             <Badge
-              textAlign={'center'}
-              fontSize={'lg'}
-              variant={'subtle'}
-              colorScheme={voteAvgColor}
               padding={2}
-              borderRadius={'lg'}
-              boxShadow={'md'}
-              textTransform={'none'}
-            >
-              {vote_average} / 10
-            </Badge>
-          </CustomizeTooltip>
-
-          <CustomizeTooltip message={'Popularity'}>
-            <Badge
+              colorScheme={'gray'}
               textAlign={'center'}
-              fontSize={'lg'}
-              variant={'subtle'}
-              colorScheme={popularityColor}
-              padding={2}
-              borderRadius={'lg'}
-              boxShadow={'md'}
+              fontSize={'md'}
+              fontWeight={'bold'}
             >
-              {popularity.toFixed(2)}
+              {new Date(date).toLocaleDateString()}
             </Badge>
-          </CustomizeTooltip>
-
-          {country && country.length !== 0 && (
-            <CustomizeTooltip message={countryDesc}>
+          </Flex>
+          <Flex flexDirection={'column'} gap={2}>
+            <CustomizeTooltip message={'Number of votes'}>
               <Badge
                 textAlign={'center'}
                 fontSize={'lg'}
                 variant={'subtle'}
-                colorScheme={'gray'}
+                padding={2}
+                borderRadius={'lg'}
+                boxShadow={'md'}
+                textTransform={'none'}
+                colorScheme={voteCountColor}
+              >
+                {vote_count}
+              </Badge>
+            </CustomizeTooltip>
+
+            <CustomizeTooltip message={'Rating'}>
+              <Badge
+                textAlign={'center'}
+                fontSize={'lg'}
+                variant={'subtle'}
+                colorScheme={voteAvgColor}
+                padding={2}
+                borderRadius={'lg'}
+                boxShadow={'md'}
+                textTransform={'none'}
+              >
+                {vote_average} / 10
+              </Badge>
+            </CustomizeTooltip>
+
+            <CustomizeTooltip message={'Popularity'}>
+              <Badge
+                textAlign={'center'}
+                fontSize={'lg'}
+                variant={'subtle'}
+                colorScheme={popularityColor}
                 padding={2}
                 borderRadius={'lg'}
                 boxShadow={'md'}
               >
-                {country.toString()}
+                {popularity.toFixed(2)}
               </Badge>
             </CustomizeTooltip>
-          )}
 
-          <Spacer />
+            {country && country.length !== 0 && (
+              <CustomizeTooltip message={countryDesc}>
+                <Badge
+                  textAlign={'center'}
+                  fontSize={'lg'}
+                  variant={'subtle'}
+                  colorScheme={'gray'}
+                  padding={2}
+                  borderRadius={'lg'}
+                  boxShadow={'md'}
+                >
+                  {country.toString()}
+                </Badge>
+              </CustomizeTooltip>
+            )}
 
-          <ButtonGroup
-            display={{ lg: 'block', md: 'none', sm: 'none', base: 'block' }}
-          >
+            <Spacer />
+
+            <ButtonGroup
+              display={{ lg: 'block', md: 'none', sm: 'none', base: 'block' }}
+            >
+              <CustomizeTooltip message={statusLike ? 'Unlike it' : 'Like it'}>
+                <IconButton
+                  icon={<BiLike />}
+                  colorScheme={'teal'}
+                  boxShadow={'md'}
+                  onClick={handleLike}
+                  variant={statusLike ? 'solid' : 'outline'}
+                  borderWidth={1}
+                  borderColor={statusLike ? 'transparent' : 'auto'}
+                />
+              </CustomizeTooltip>
+              <CustomizeTooltip
+                message={statusFavorite ? 'Unfavorite it' : 'Favorite it'}
+              >
+                <IconButton
+                  icon={<StarIcon />}
+                  colorScheme={'orange'}
+                  boxShadow={'md'}
+                  onClick={handleFavorite}
+                  variant={statusFavorite ? 'solid' : 'outline'}
+                  borderWidth={1}
+                  borderColor={statusFavorite ? 'transparent' : 'auto'}
+                />
+              </CustomizeTooltip>
+            </ButtonGroup>
+
             <CustomizeTooltip message={statusLike ? 'Unlike it' : 'Like it'}>
-              <IconButton
-                icon={<BiLike />}
+              <Button
+                leftIcon={<BiLike />}
                 colorScheme={'teal'}
+                display={{
+                  lg: 'none',
+                  md: 'initial',
+                  sm: 'initial',
+                  base: 'none',
+                }}
                 boxShadow={'md'}
                 onClick={handleLike}
                 variant={statusLike ? 'solid' : 'outline'}
                 borderWidth={1}
                 borderColor={statusLike ? 'transparent' : 'auto'}
-              />
+              >
+                Like
+              </Button>
             </CustomizeTooltip>
+
             <CustomizeTooltip
               message={statusFavorite ? 'Unfavorite it' : 'Favorite it'}
             >
-              <IconButton
-                icon={<StarIcon />}
+              <Button
+                leftIcon={<StarIcon />}
                 colorScheme={'orange'}
+                display={{
+                  lg: 'none',
+                  md: 'initial',
+                  sm: 'initial',
+                  base: 'none',
+                }}
                 boxShadow={'md'}
-                onClick={handleFavorite}
                 variant={statusFavorite ? 'solid' : 'outline'}
+                onClick={handleFavorite}
                 borderWidth={1}
                 borderColor={statusFavorite ? 'transparent' : 'auto'}
-              />
+              >
+                Favorite
+              </Button>
             </CustomizeTooltip>
-          </ButtonGroup>
-
-          <CustomizeTooltip message={statusLike ? 'Unlike it' : 'Like it'}>
-            <Button
-              leftIcon={<BiLike />}
-              colorScheme={'teal'}
-              display={{
-                lg: 'none',
-                md: 'initial',
-                sm: 'initial',
-                base: 'none',
-              }}
-              boxShadow={'md'}
-              onClick={handleLike}
-              variant={statusLike ? 'solid' : 'outline'}
-              borderWidth={1}
-              borderColor={statusLike ? 'transparent' : 'auto'}
-            >
-              Like
-            </Button>
-          </CustomizeTooltip>
-
-          <CustomizeTooltip
-            message={statusFavorite ? 'Unfavorite it' : 'Favorite it'}
-          >
-            <Button
-              leftIcon={<StarIcon />}
-              colorScheme={'orange'}
-              display={{
-                lg: 'none',
-                md: 'initial',
-                sm: 'initial',
-                base: 'none',
-              }}
-              boxShadow={'md'}
-              variant={statusFavorite ? 'solid' : 'outline'}
-              onClick={handleFavorite}
-              borderWidth={1}
-              borderColor={statusFavorite ? 'transparent' : 'auto'}
-            >
-              Favorite
-            </Button>
-          </CustomizeTooltip>
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </Link>
   );
 };
 

@@ -16,6 +16,7 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import Movies from './pages/Movies';
 import Friends from './pages/Friends';
+import Film from './pages/Film';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
@@ -32,10 +33,11 @@ root.render(
             <Route path="/" element={<App />}>
               <Route path="" element={<Landing />} />
               <Route path="home" element={<Home />} />
-              <Route path="favorite" element={<Favorite />} />
               <Route path="tv-shows" element={<TvShows />} />
               <Route path="movies" element={<Movies />} />
+              <Route path="favorite" element={<Favorite />} />
               <Route path="friends" element={<Friends />} />
+              <Route path="details" element={<Film />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

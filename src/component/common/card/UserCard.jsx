@@ -1,12 +1,12 @@
 import { AddIcon } from '@chakra-ui/icons';
 import {
-  Button, HStack,
+  Button,
+  HStack,
   IconButton,
-  Radio,
   Spacer,
   Stack,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Avvvatars from 'avvvatars-react';
 import { useEffect, useState } from 'react';
