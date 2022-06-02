@@ -92,12 +92,13 @@ export const updateLikes = createAsyncThunk(
       : moviesAPI.getMovie(id));
     const genres = film.data.genres.map(genre => genre.name);
     film.data = { ...film.data, genres };
-    const name = getSignUpUsername(thunkAPI.getState());
+    const username = getSignUpUsername(thunkAPI.getState());
     console.log('first');
+    const name = variant === 'tv' ? film.data.name : film.data.title;
     const res = await filmAPI.addLikeFilmTo(
-      { ...film.data, name: film.data.title },
+      { ...film.data, name },
       {
-        name: name,
+        name: username,
         variant: variant,
         type: 'like',
       }
@@ -130,11 +131,13 @@ export const updateFavorites = createAsyncThunk(
       : moviesAPI.getMovie(id));
     const genres = film.data.genres.map(genre => genre.name);
     film.data = { ...film.data, genres };
-    const name = getSignUpUsername(thunkAPI.getState());
+    const username = getSignUpUsername(thunkAPI.getState());
+    const name = variant === 'tv' ? film.data.name : film.data.title;
+
     const res = await filmAPI.addLikeFilmTo(
-      { ...film.data, name: film.data.title },
+      { ...film.data, name },
       {
-        name: name,
+        name: username,
         variant: variant,
         type: 'favorite',
       }
