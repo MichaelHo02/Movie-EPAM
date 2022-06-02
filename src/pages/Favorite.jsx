@@ -6,7 +6,11 @@ import PaginationForList from '../component/common/cardController/pagination/Pag
 import CardHolder from '../component/common/holder/CardHolder';
 import Holder from '../component/common/holder/Holder';
 import { getFilmInfo } from '../redux/selectors';
-import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
+import {
+  decrementPage,
+  fetchLikesAndFavorites,
+  incrementPage,
+} from '../redux/slices/filmSlice';
 
 const displayNumber = 20;
 
@@ -27,7 +31,8 @@ const Favorite = () => {
     setPage(filmInfo.data.page);
   }, [filmInfo.data.page]);
   const start = (page - 1) * displayNumber;
-  let displayFilm = films.slice(start, start + displayNumber);
+  const maxPage = Math.ceil(films.length / displayNumber);
+  const displayFilms = films.slice(start, start + displayNumber);
   return (
     <Box marginY={10}>
       <Holder marginY={8}>
@@ -36,22 +41,24 @@ const Favorite = () => {
         </Heading>
       </Holder>
       <PaginationForList
-        displayNumber={displayNumber}
         currentPage={page}
-        currentFilms={films}
+        currentMaxPage={maxPage}
+        incrementPage={incrementPage}
+        decrementPage={decrementPage}
       />
       <CardHolder>
-        {displayFilm &&
-          displayFilm.map(card => {
-            console.log(filmInfo.data.likesId[`${card.id}`]);
+        {displayFilms &&
+          displayFilms.map(card => {
             return (
               <Card
                 key={card.id}
                 title={card.name}
                 {...card}
-                country={card.origin_country}
-                countryDesc={'Origin Country'}
-                variant={'tv'}
+                country={card.country}
+                countryDesc={
+                  card.variant === 'tv' ? 'Origin Country' : 'Original language'
+                }
+                variant={card.variant}
                 currentStatusLike={filmInfo.data.likesId[`${card.id}`]}
                 currentStatusFavorite={filmInfo.data.favoritesId[`${card.id}`]}
               />

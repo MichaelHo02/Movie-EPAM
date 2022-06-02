@@ -184,7 +184,7 @@ const Card = ({
           <ButtonGroup
             display={{ lg: 'block', md: 'none', sm: 'none', base: 'block' }}
           >
-            <CustomizeTooltip message={'Like if you love it'}>
+            <CustomizeTooltip message={statusLike ? 'Unlike it' : 'Like it'}>
               <IconButton
                 icon={<BiLike />}
                 colorScheme={'teal'}
@@ -195,7 +195,9 @@ const Card = ({
                 borderColor={statusLike ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
-            <CustomizeTooltip message={'Add to favorite list'}>
+            <CustomizeTooltip
+              message={statusFavorite ? 'Unfavorite it' : 'Favorite it'}
+            >
               <IconButton
                 icon={<StarIcon />}
                 colorScheme={'orange'}
@@ -208,7 +210,7 @@ const Card = ({
             </CustomizeTooltip>
           </ButtonGroup>
 
-          <CustomizeTooltip message={'Like if you love it'}>
+          <CustomizeTooltip message={statusLike ? 'Unlike it' : 'Like it'}>
             <Button
               leftIcon={<BiLike />}
               colorScheme={'teal'}
@@ -228,7 +230,9 @@ const Card = ({
             </Button>
           </CustomizeTooltip>
 
-          <CustomizeTooltip message={'Add to favorite list'}>
+          <CustomizeTooltip
+            message={statusFavorite ? 'Unfavorite it' : 'Favorite it'}
+          >
             <Button
               leftIcon={<StarIcon />}
               colorScheme={'orange'}

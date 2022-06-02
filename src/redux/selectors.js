@@ -10,3 +10,5 @@ export const getFilmInfo = state => state.filmInfo;
 export const getFilterInfo = state => state.filterInfo;
 
 export const getUsersInfo = state => state.userInfo;
+
+export const getFriendFavoriteInfo = state => state.friendFavorite;

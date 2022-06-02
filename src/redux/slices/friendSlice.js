@@ -10,13 +10,24 @@ const friendSlice = createSlice({
       users: [],
       friends: [],
       friendsName: {},
+      page: 1,
     },
     response: {
       success: null,
       message: '',
     },
   },
-  reducer: {},
+  reducers: {
+    incrementPage: (state, action) => {
+      const length = action.payload;
+      const nextPage = state.data.page + 1;
+      state.data.page = nextPage <= length ? nextPage : state.data.page;
+    },
+    decrementPage: (state, action) => {
+      const nextPage = state.data.page - 1;
+      state.data.page = nextPage > 0 ? nextPage : state.data.page;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchUsers.pending, (state, action) => {
@@ -54,6 +65,8 @@ const friendSlice = createSlice({
       });
   },
 });
+
+export const { incrementPage, decrementPage } = friendSlice.actions;
 
 export const fetchUsers = createAsyncThunk(
   'friend/users',

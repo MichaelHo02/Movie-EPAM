@@ -16,7 +16,7 @@ import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 import { useDispatch } from 'react-redux';
 import { addFriends, removeFriends } from '../../../redux/slices/friendSlice';
 
-const UserCard = ({ username, currentStatusFriend }) => {
+const UserCard = ({ username, currentStatusFriend, variant, onClick }) => {
   const dispatch = useDispatch();
   const [statusFriend, setStatusFriend] = useState(false);
   useEffect(() => {
@@ -48,6 +48,7 @@ const UserCard = ({ username, currentStatusFriend }) => {
       gap={2}
       alignItems={'center'}
       height={'full'}
+      onClick={onClick}
     >
       <HStack>
         <Avvvatars value={username} />
@@ -56,38 +57,47 @@ const UserCard = ({ username, currentStatusFriend }) => {
         </Text>
       </HStack>
       <Spacer />
-      <CustomizeTooltip message={'Add friends'}>
-        <IconButton
-          icon={<AddIcon />}
-          colorScheme={'orange'}
-          boxShadow={'md'}
-          onClick={handleAddFriend}
-          variant={statusFriend ? 'solid' : 'outline'}
-          borderWidth={'1px'}
-          borderColor={statusFriend ? 'transparent' : 'auto'}
-          display={{ lg: 'initial', md: 'initial', sm: 'none', base: 'none' }}
-        />
-      </CustomizeTooltip>
-      <CustomizeTooltip message={'Add friends'}>
-        <Button
-          leftIcon={<AddIcon />}
-          colorScheme={'orange'}
-          display={{
-            lg: 'none',
-            md: 'none',
-            sm: 'initial',
-            base: 'initial',
-          }}
-          width={{ sm: 'auto', base: 'full' }}
-          boxShadow={'md'}
-          variant={statusFriend ? 'solid' : 'outline'}
-          onClick={handleAddFriend}
-          borderWidth={'1px'}
-          borderColor={statusFriend ? 'transparent' : 'auto'}
-        >
-          Add Friends
-        </Button>
-      </CustomizeTooltip>
+      {variant !== 'display' && (
+        <>
+          <CustomizeTooltip message={'Add friends'}>
+            <IconButton
+              icon={<AddIcon />}
+              colorScheme={'orange'}
+              boxShadow={'md'}
+              onClick={handleAddFriend}
+              variant={statusFriend ? 'solid' : 'outline'}
+              borderWidth={'1px'}
+              borderColor={statusFriend ? 'transparent' : 'auto'}
+              display={{
+                lg: 'initial',
+                md: 'initial',
+                sm: 'none',
+                base: 'none',
+              }}
+            />
+          </CustomizeTooltip>
+          <CustomizeTooltip message={'Add friends'}>
+            <Button
+              leftIcon={<AddIcon />}
+              colorScheme={'orange'}
+              display={{
+                lg: 'none',
+                md: 'none',
+                sm: 'initial',
+                base: 'initial',
+              }}
+              width={{ sm: 'auto', base: 'full' }}
+              boxShadow={'md'}
+              variant={statusFriend ? 'solid' : 'outline'}
+              onClick={handleAddFriend}
+              borderWidth={'1px'}
+              borderColor={statusFriend ? 'transparent' : 'auto'}
+            >
+              Add Friends
+            </Button>
+          </CustomizeTooltip>
+        </>
+      )}
     </Stack>
   );
 };

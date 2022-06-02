@@ -15,10 +15,6 @@ const filmSlice = createSlice({
       favorites: [],
       page: 1,
     },
-    response: {
-      success: null,
-      message: '',
-    },
   },
   reducers: {
     setLikes: (state, action) => {
@@ -107,7 +103,7 @@ export const updateLikes = createAsyncThunk(
     console.log('first');
     const name = variant === 'tv' ? film.data.name : film.data.title;
     const res = await filmAPI.addLikeFilmTo(
-      { ...film.data, name },
+      { ...film.data, name, variant },
       {
         name: username,
         variant: variant,
@@ -146,9 +142,11 @@ export const updateFavorites = createAsyncThunk(
     const name = variant === 'tv' ? film.data.name : film.data.title;
     const date =
       variant === 'tv' ? film.data.first_air_date : film.data.release_date;
+    const country =
+      variant === 'tv' ? film.data.origin_country : film.data.original_language;
 
     const res = await filmAPI.addLikeFilmTo(
-      { ...film.data, name, date },
+      { ...film.data, name, date, variant, country },
       {
         name: username,
         variant: variant,

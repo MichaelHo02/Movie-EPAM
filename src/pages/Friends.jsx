@@ -10,7 +10,6 @@ import { getSignUpUsername, getUsersInfo } from '../redux/selectors';
 const Friends = () => {
   const info = useSelector(getUsersInfo);
   const username = useSelector(getSignUpUsername);
-  console.log(info);
   const [cards, setCards] = useState([]);
   useEffect(() => setCards(info.data.users), [info]);
   return (
