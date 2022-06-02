@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../component/common/card/Card';
 import CardController from '../component/common/cardController/CardController';
-import CardHolder from '../component/common/cardHolder/CardHolder';
+import FilterController from '../component/common/cardController/FilterController';
+import PaginationController from '../component/common/cardController/PaginationController';
+import CardHolder from '../component/common/holder/CardHolder';
 import { getFilmInfo, getFilterInfo } from '../redux/selectors';
 import { fetchLikesAndFavorites } from '../redux/slices/filmSlide';
 import { fetchMovie } from '../redux/slices/filterSlice';
@@ -20,7 +22,8 @@ const Movies = () => {
   console.log(filmInfo);
   return (
     <Box marginBottom={10}>
-      <CardController variant={'movie'} />
+      <FilterController variant={'movie'} />
+      <PaginationController />
       <CardHolder>
         {filterInfo.pagination.results &&
           filterInfo.pagination.results.map(card => {
@@ -39,6 +42,7 @@ const Movies = () => {
             );
           })}
       </CardHolder>
+      <PaginationController />
     </Box>
   );
 };

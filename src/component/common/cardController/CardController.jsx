@@ -7,7 +7,6 @@ const CardController = ({ variant }) => {
   return (
     <>
       <FilterController variant={variant} />
-      <PaginationController />
     </>
   );
 };

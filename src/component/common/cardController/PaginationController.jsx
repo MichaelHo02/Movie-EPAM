@@ -12,47 +12,40 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilterInfo } from '../../../redux/selectors';
 import { fetchTV } from '../../../redux/slices/filterSlice';
+import Holder from '../holder/Holder';
 
 const PaginationController = () => {
-  const backgroundColor = useColorModeValue('gray.200', 'gray.700');
   const dispatch = useDispatch();
   const selector = useSelector(getFilterInfo).pagination;
   return (
-    <Flex
-      marginY={4}
-      padding={4}
-      backgroundColor={backgroundColor}
-      borderRadius={'md'}
-      boxShadow={'md'}
-      width={'full'}
-      gap={2}
-      alignItems={'center'}
-    >
-      <Text
-        fontSize={'xl'}
-      >{`Page: ${selector.page} / ${selector.total_pages}`}</Text>
-      <Spacer />
-      <ButtonGroup>
-        <IconButton
-          icon={<ArrowLeftIcon />}
-          colorScheme={'teal'}
-          variant={'outline'}
-          onClick={() => {
-            dispatch(fetchTV(-1));
-          }}
-          isDisabled={selector.page === 1}
-        />
-        <IconButton
-          icon={<ArrowRightIcon />}
-          colorScheme={'teal'}
-          variant={'outline'}
-          onClick={() => {
-            dispatch(fetchTV(1));
-          }}
-          isDisabled={selector.page === selector.total_pages}
-        />
-      </ButtonGroup>
-    </Flex>
+    <Holder>
+      <Flex alignItems={'center'} padding={4} gap={2}>
+        <Text
+          fontSize={'xl'}
+        >{`Page: ${selector.page} / ${selector.total_pages}`}</Text>
+        <Spacer />
+        <ButtonGroup>
+          <IconButton
+            icon={<ArrowLeftIcon />}
+            colorScheme={'teal'}
+            variant={'outline'}
+            onClick={() => {
+              dispatch(fetchTV(-1));
+            }}
+            isDisabled={selector.page === 1}
+          />
+          <IconButton
+            icon={<ArrowRightIcon />}
+            colorScheme={'teal'}
+            variant={'outline'}
+            onClick={() => {
+              dispatch(fetchTV(1));
+            }}
+            isDisabled={selector.page === selector.total_pages}
+          />
+        </ButtonGroup>
+      </Flex>
+    </Holder>
   );
 };
 

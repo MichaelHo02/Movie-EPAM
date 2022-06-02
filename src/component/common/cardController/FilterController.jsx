@@ -5,12 +5,12 @@ import {
   AccordionItem,
   AccordionPanel,
   Button,
-  Heading,
+  Heading
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchMovie, fetchTV } from '../../../redux/slices/filterSlice';
-import AccordionHolder from './AccordionHolder';
+import Holder from '../holder/Holder';
 import AirDateController from './AirDateController';
 import GenresController from './GenresController';
 import RunTimeSlider from './slider/RunTimeSlider';
@@ -36,52 +36,52 @@ const FilterController = ({ variant }) => {
       onChange={() => setAccordionState(!accordionState)}
     >
       <AccordionItem marginY={8} border={'none'}>
-        <AccordionHolder>
+        <Holder>
           <AccordionButton borderRadius={'inherit'} paddingY={4}>
             <Heading flex={1} textAlign={'left'} fontSize={'3xl'}>
               Filter & Sort
             </Heading>
             <AccordionIcon />
           </AccordionButton>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <SortCard />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <GenresController variant={variant} />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <VoteCountSlider />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <VoteAveragedSlider />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <RunTimeSlider />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <AirDateController />
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
 
-        <AccordionHolder>
+        <Holder>
           <AccordionPanel>
             <Button
               marginTop={3}
@@ -93,7 +93,7 @@ const FilterController = ({ variant }) => {
               Submit
             </Button>
           </AccordionPanel>
-        </AccordionHolder>
+        </Holder>
       </AccordionItem>
     </Accordion>
   );

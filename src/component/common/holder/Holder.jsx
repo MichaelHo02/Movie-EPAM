@@ -1,20 +1,21 @@
 import { Box, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
-const AccordionHolder = ({ children }) => {
+const Holder = ({ children, props, marginY = 4 }) => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.700');
 
   return (
     <Box
-      marginY={4}
+      marginY={marginY}
       backgroundColor={backgroundColor}
       borderRadius={'md'}
       boxShadow={'md'}
       width={'full'}
+      {...props}
     >
       {children}
     </Box>
   );
 };
 
-export default AccordionHolder;
+export default Holder;

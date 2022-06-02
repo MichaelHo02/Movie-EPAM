@@ -1,8 +1,9 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import UserCard from '../component/common/card/UserCard';
-import CardHolder from '../component/common/cardHolder/CardHolder';
+import CardHolder from '../component/common/holder/CardHolder';
+import Holder from '../component/common/holder/Holder';
 import SearchUser from '../component/friends/SearchUser';
 import { getSignUpUsername, getUsersInfo } from '../redux/selectors';
 
@@ -14,6 +15,11 @@ const Friends = () => {
   useEffect(() => setCards(info.data.users), [info]);
   return (
     <Box marginBottom={10}>
+      <Holder marginY={8}>
+        <Heading padding={4} fontSize={'3xl'}>
+          Find & Add Friends
+        </Heading>
+      </Holder>
       <SearchUser />
       <CardHolder>
         {cards &&

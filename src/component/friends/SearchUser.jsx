@@ -9,9 +9,10 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsers } from '../../redux/slices/friendSlice';
+import Holder from '../common/holder/Holder';
 
 const SearchUser = () => {
-  const backgroundColor = useColorModeValue('gray.200', 'gray.700');
+  const borderColor = useColorModeValue('gray.400', 'gray.500');
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
   const handleSearch = () => {
@@ -19,18 +20,13 @@ const SearchUser = () => {
     setValue('');
   };
   return (
-    <Box
-      marginY={8}
-      backgroundColor={backgroundColor}
-      borderRadius={'md'}
-      boxShadow={'md'}
-      width={'full'}
-    >
+    <Holder>
       <Stack padding={4} gap={2} direction={['column', 'row']}>
         <Input
           placeholder={'Find friends by username'}
           _placeholder={{ opacity: 0.8, color: 'inherit' }}
           size={'lg'}
+          borderColor={borderColor}
           variant={'filled'}
           focusBorderColor={'teal.500'}
           value={value}
@@ -44,7 +40,7 @@ const SearchUser = () => {
           onClick={handleSearch}
         />
       </Stack>
-    </Box>
+    </Holder>
   );
 };
 
