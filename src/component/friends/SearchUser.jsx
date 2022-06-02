@@ -16,10 +16,11 @@ const SearchUser = () => {
   const dispatch = useDispatch();
   const handleSearch = () => {
     dispatch(fetchUsers(value));
+    setValue('');
   };
   return (
     <Box
-      marginY={4}
+      marginY={8}
       backgroundColor={backgroundColor}
       borderRadius={'md'}
       boxShadow={'md'}

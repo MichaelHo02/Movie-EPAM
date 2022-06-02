@@ -56,7 +56,7 @@ const UserCard = ({ username, currentStatusFriend }) => {
         </Text>
       </HStack>
       <Spacer />
-      <CustomizeTooltip message={'Add to favorite list'}>
+      <CustomizeTooltip message={'Add friends'}>
         <IconButton
           icon={<AddIcon />}
           colorScheme={'orange'}
@@ -68,7 +68,7 @@ const UserCard = ({ username, currentStatusFriend }) => {
           display={{ lg: 'initial', md: 'initial', sm: 'none', base: 'none' }}
         />
       </CustomizeTooltip>
-      <CustomizeTooltip message={'Add to favorite list'}>
+      <CustomizeTooltip message={'Add friends'}>
         <Button
           leftIcon={<AddIcon />}
           colorScheme={'orange'}
