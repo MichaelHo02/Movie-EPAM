@@ -5,13 +5,13 @@ import { updateGenres } from '../../../redux/slices/filterSlice';
 import { fetchGenre } from '../../../redux/slices/genreSlice';
 import CheckBox from './CheckBox';
 
-const GenresController = () => {
+const GenresController = ({ variant }) => {
   const { value, getCheckboxProps } = useCheckboxGroup({});
   const dispatch = useDispatch();
   const genreList = useSelector(state => state.genreInfo.data);
   useEffect(() => {
-    dispatch(fetchGenre());
-  }, [dispatch]);
+    dispatch(fetchGenre(variant));
+  }, [dispatch, variant]);
 
   useEffect(() => {
     dispatch(updateGenres(value));

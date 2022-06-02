@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchTV } from '../../../redux/slices/filterSlice';
+import { fetchMovie, fetchTV } from '../../../redux/slices/filterSlice';
 import AccordionHolder from './AccordionHolder';
 import AirDateController from './AirDateController';
 import GenresController from './GenresController';
@@ -17,12 +17,16 @@ import RunTimeSlider from './slider/RunTimeSlider';
 import VoteAveragedSlider from './slider/VoteAveragedSlider';
 import VoteCountSlider from './slider/VoteCountSlider';
 import SortCard from './SortCard';
-const FilterController = () => {
+const FilterController = ({ variant }) => {
   const [accordionState, setAccordionState] = useState(false);
 
   const dispatch = useDispatch();
   const handleOnClick = e => {
-    dispatch(fetchTV());
+    if (variant === 'tv') {
+      dispatch(fetchTV());
+    } else {
+      dispatch(fetchMovie());
+    }
     setAccordionState(false);
   };
   return (
@@ -49,7 +53,7 @@ const FilterController = () => {
 
         <AccordionHolder>
           <AccordionPanel>
-            <GenresController />
+            <GenresController variant={variant} />
           </AccordionPanel>
         </AccordionHolder>
 

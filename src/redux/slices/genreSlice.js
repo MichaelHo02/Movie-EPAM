@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import moviesAPI from '../../api/services/movieAPI';
 import tvShowsAPI from '../../api/services/tvShowsAPI';
 
 const genreSlice = createSlice({
@@ -30,8 +31,10 @@ const genreSlice = createSlice({
 
 export const { setGenre } = genreSlice.actions;
 
-export const fetchGenre = createAsyncThunk('genre/fetch', async () => {
-  const res = await tvShowsAPI.getGenres();
+export const fetchGenre = createAsyncThunk('genre/fetch', async variant => {
+  const res = await (variant === 'tv'
+    ? tvShowsAPI.getGenres()
+    : moviesAPI.getGenres());
   return res.data;
 });
 

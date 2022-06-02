@@ -43,7 +43,6 @@ const Card = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log({title, currentStatusLike, currentStatusFavorite});
     setStatusLike(currentStatusLike);
     setStatusFavorite(currentStatusFavorite);
   }, [currentStatusFavorite, currentStatusLike]);

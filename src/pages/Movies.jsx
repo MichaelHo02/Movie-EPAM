@@ -20,7 +20,7 @@ const Movies = () => {
   console.log(filmInfo);
   return (
     <Box marginBottom={10}>
-      <CardController />
+      <CardController variant={'movie'} />
       <CardHolder>
         {filterInfo.pagination.results &&
           filterInfo.pagination.results.map((card, index) => {

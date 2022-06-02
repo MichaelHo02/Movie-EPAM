@@ -18,9 +18,6 @@ const Favorite = () => {
       <CardHolder>
         {filmInfo.data.favorites &&
           filmInfo.data.favorites.map(card => {
-            console.log(card.name);
-            console.log(filmInfo.data.likesId[`${card.id}`]);
-            console.log(filmInfo.data.favoritesId[`${card.id}`]);
             return (
               <Card
                 key={card.id}

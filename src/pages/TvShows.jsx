@@ -20,7 +20,7 @@ const TvShows = () => {
 
   return (
     <Box marginBottom={10}>
-      <CardController />
+      <CardController variant={'tv'} />
       <CardHolder>
         {filterInfo.pagination.results &&
           filterInfo.pagination.results.map((card, index) => {
