@@ -6,14 +6,17 @@ const friendFavoriteSlice = createSlice({
   initialState: {
     status: 'idle',
     data: {
-      likesId: {},
-      likes: [],
       favoritesId: {},
       favorites: [],
       page: 1,
     },
   },
   reducers: {
+    clearData: (state, data) => {
+      state.data.favoritesId = {};
+      state.data.favorites = [];
+      state.data.page = 1;
+    },
     incrementPage: (state, action) => {
       const length = action.payload;
       const nextPage = state.data.page + 1;
@@ -45,7 +48,8 @@ const friendFavoriteSlice = createSlice({
   },
 });
 
-export const { incrementPage, decrementPage } = friendFavoriteSlice.actions;
+export const { incrementPage, decrementPage, cleanData } =
+  friendFavoriteSlice.actions;
 
 export const fetchFavoritesFriends = createAsyncThunk(
   'film/fetchFavoritesFriends',

@@ -17,6 +17,13 @@ const filmSlice = createSlice({
     },
   },
   reducers: {
+    clearData: (state, action) => {
+      state.data.likesId = {};
+      state.data.likes = [];
+      state.data.favoritesId = {};
+      state.data.favorites = [];
+      state.data.page = 1;
+    },
     setLikes: (state, action) => {
       state.data.likes = [...state.data.like, action.payload];
     },
@@ -88,8 +95,13 @@ const filmSlice = createSlice({
   },
 });
 
-export const { setLikes, setFavorites, incrementPage, decrementPage } =
-  filmSlice.actions;
+export const {
+  clearData,
+  setLikes,
+  setFavorites,
+  incrementPage,
+  decrementPage,
+} = filmSlice.actions;
 
 export const updateLikes = createAsyncThunk(
   'film/likes',

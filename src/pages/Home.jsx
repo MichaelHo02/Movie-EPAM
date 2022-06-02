@@ -25,6 +25,7 @@ import UserHolder from '../component/common/holder/UserHolder';
 import { fetchFavoritesFriends } from '../redux/slices/friendFavoriteSlice';
 import Card from '../component/common/card/Card';
 import CardHolder from '../component/common/holder/CardHolder';
+import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
 
 const displayNumberUser = 4;
 const displayNumberFilm = 12;
@@ -39,6 +40,10 @@ const Home = () => {
   const [films, setFilms] = useState([]);
   const [pageUser, setPageUser] = useState(1);
   const [pageFilm, setPageFilm] = useState(1);
+
+  useEffect(() => {
+    dispatch(fetchLikesAndFavorites());
+  }, []);
 
   useEffect(() => {
     dispatch(fetchUsers(''));
@@ -97,6 +102,7 @@ const Home = () => {
                       currentStatusFriend={
                         userInfo.data.friendsName[card.username]
                       }
+                      cursor={'pointer'}
                       onClick={() => {
                         console.log(card.username);
                         dispatch(fetchFavoritesFriends(card.username));

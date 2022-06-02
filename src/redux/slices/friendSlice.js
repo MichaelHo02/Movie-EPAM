@@ -18,6 +18,12 @@ const friendSlice = createSlice({
     },
   },
   reducers: {
+    clearData: (state, data) => {
+      state.data.users = [];
+      state.data.friends = [];
+      state.data.friendsName = {};
+      state.data.page = 1;
+    },
     incrementPage: (state, action) => {
       const length = action.payload;
       const nextPage = state.data.page + 1;

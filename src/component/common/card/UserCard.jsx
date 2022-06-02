@@ -16,7 +16,13 @@ import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 import { useDispatch } from 'react-redux';
 import { addFriends, removeFriends } from '../../../redux/slices/friendSlice';
 
-const UserCard = ({ username, currentStatusFriend, variant, onClick }) => {
+const UserCard = ({
+  username,
+  currentStatusFriend,
+  variant,
+  onClick,
+  cursor = 'initial',
+}) => {
   const dispatch = useDispatch();
   const [statusFriend, setStatusFriend] = useState(false);
   useEffect(() => {
@@ -49,6 +55,7 @@ const UserCard = ({ username, currentStatusFriend, variant, onClick }) => {
       alignItems={'center'}
       height={'full'}
       onClick={onClick}
+      cursor={cursor}
     >
       <HStack>
         <Avvvatars value={username} />
