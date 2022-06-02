@@ -63,6 +63,7 @@ const Header = () => {
       variant="outline"
       onClick={() => {
         onOpen();
+        hamOnClose();
       }}
     >
       Sign In
@@ -74,6 +75,7 @@ const Header = () => {
       fontSize={'lg'}
       colorScheme={'orange'}
       onClick={() => {
+        hamOnClose();
         dispatch(clearUser());
         navigate('/');
       }}

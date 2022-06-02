@@ -15,6 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import Movies from './pages/Movies';
+import Friends from './pages/Friends';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
@@ -34,6 +35,7 @@ root.render(
               <Route path="favorite" element={<Favorite />} />
               <Route path="tv-shows" element={<TvShows />} />
               <Route path="movies" element={<Movies />} />
+              <Route path="friends" element={<Friends />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
