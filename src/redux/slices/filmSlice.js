@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import filmAPI from '../../api/services/filmAPI';
 import moviesAPI from '../../api/services/movieAPI';
 import tvShowsAPI from '../../api/services/tvShowsAPI';
-import { getSignUpEmail, getSignUpUsername } from '../selectors';
+import { getSignUpUsername } from '../selectors';
 
-const filmSlide = createSlice({
+const filmSlice = createSlice({
   name: 'film',
   initialState: {
     status: 'idle',
@@ -13,18 +13,28 @@ const filmSlide = createSlice({
       likes: [],
       favoritesId: {},
       favorites: [],
+      page: 1,
     },
     response: {
       success: null,
       message: '',
     },
   },
-  reducer: {
+  reducers: {
     setLikes: (state, action) => {
       state.data.likes = [...state.data.like, action.payload];
     },
     setFavorites: (state, action) => {
       state.data.favorites = [...state.data.favorites, action.payload];
+    },
+    incrementPage: (state, action) => {
+      const length = action.payload;
+      const nextPage = state.data.page + 1;
+      state.data.page = nextPage <= length ? nextPage : state.data.page;
+    },
+    decrementPage: (state, action) => {
+      const nextPage = state.data.page - 1;
+      state.data.page = nextPage > 0 ? nextPage : state.data.page;
     },
   },
   extraReducers: builder => {
@@ -82,7 +92,8 @@ const filmSlide = createSlice({
   },
 });
 
-export const { setLikes, setFavorites } = filmSlide.actions;
+export const { setLikes, setFavorites, incrementPage, decrementPage } =
+  filmSlice.actions;
 
 export const updateLikes = createAsyncThunk(
   'film/likes',
@@ -168,7 +179,4 @@ export const fetchLikesAndFavorites = createAsyncThunk(
   }
 );
 
-export const fetchLikes = createAsyncThunk();
-export const fetchFavorites = createAsyncThunk();
-
-export default filmSlide.reducer;
+export default filmSlice.reducer;

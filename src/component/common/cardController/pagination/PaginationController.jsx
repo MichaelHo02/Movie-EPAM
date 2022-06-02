@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFilterInfo } from '../../../../redux/selectors';
 import { fetchTV } from '../../../../redux/slices/filterSlice';
 import Holder from '../../holder/Holder';
+import PaginationButton from './PaginationButton';
 
 const PaginationController = () => {
   const dispatch = useDispatch();
@@ -25,19 +26,15 @@ const PaginationController = () => {
         >{`Page: ${selector.page} / ${selector.total_pages}`}</Text>
         <Spacer />
         <ButtonGroup>
-          <IconButton
+          <PaginationButton
             icon={<ArrowLeftIcon />}
-            colorScheme={'teal'}
-            variant={'outline'}
             onClick={() => {
               dispatch(fetchTV(-1));
             }}
             isDisabled={selector.page === 1}
           />
-          <IconButton
+          <PaginationButton
             icon={<ArrowRightIcon />}
-            colorScheme={'teal'}
-            variant={'outline'}
             onClick={() => {
               dispatch(fetchTV(1));
             }}

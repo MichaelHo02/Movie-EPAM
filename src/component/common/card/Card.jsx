@@ -20,7 +20,7 @@ import {
   removeLikes,
   updateFavorites,
   updateLikes,
-} from '../../../redux/slices/filmSlide';
+} from '../../../redux/slices/filmSlice';
 
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 

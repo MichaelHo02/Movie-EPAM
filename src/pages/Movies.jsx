@@ -6,7 +6,7 @@ import FilterController from '../component/common/cardController/FilterControlle
 import PaginationController from '../component/common/cardController/pagination/PaginationController';
 import CardHolder from '../component/common/holder/CardHolder';
 import { getFilmInfo, getFilterInfo } from '../redux/selectors';
-import { fetchLikesAndFavorites } from '../redux/slices/filmSlide';
+import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
 import { fetchMovie } from '../redux/slices/filterSlice';
 
 const Movies = () => {
