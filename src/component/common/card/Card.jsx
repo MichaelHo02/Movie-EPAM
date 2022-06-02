@@ -115,7 +115,7 @@ const Card = ({
           as={Link}
           to={{
             pathname: '/details',
-            search: `?id=${id}`,
+            search: `?id=${id}&variant=${variant}`,
           }}
         >
           <Text fontSize={'lg'} fontWeight={'bold'}>

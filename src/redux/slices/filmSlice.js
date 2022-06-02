@@ -14,6 +14,7 @@ const filmSlice = createSlice({
       favoritesId: {},
       favorites: [],
       page: 1,
+      film: {},
     },
   },
   reducers: {
@@ -91,6 +92,13 @@ const filmSlice = createSlice({
       .addCase(removeFavorites.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.data.favorites = action.payload.favorites;
+      })
+      .addCase(fetchTV.pending, (state, action) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchTV.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.data.film = action.payload;
       });
   },
 });
@@ -122,9 +130,7 @@ export const updateLikes = createAsyncThunk(
         type: 'like',
       }
     );
-    console.log('seconds');
 
-    console.log('[res]', res.data);
     return res.data;
   }
 );
@@ -188,6 +194,26 @@ export const fetchLikesAndFavorites = createAsyncThunk(
     const name = getSignUpUsername(thunkAPI.getState());
     const res = await filmAPI.getFilms({ name });
     return res.data;
+  }
+);
+
+export const fetchMovie = createAsyncThunk(
+  'film/fetchMovie',
+  async (id, thunkAPI) => {
+    let film = await moviesAPI.getMovie(id);
+  }
+);
+
+export const fetchTV = createAsyncThunk(
+  'film/fetchTV',
+  async (id, thunkAPI) => {
+    console.log(id);
+    let film = await tvShowsAPI.getTvShow(id);
+    const genres = film.data.genres.map(genre => genre.name);
+    film.data = { ...film.data, genres };
+    const name = film.data.name;
+    const res = { ...film.data, name, variant: 'tv' };
+    return res;
   }
 );
 
