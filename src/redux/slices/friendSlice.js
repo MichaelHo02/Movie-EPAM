@@ -24,6 +24,9 @@ const friendSlice = createSlice({
       state.data.friendsName = {};
       state.data.page = 1;
     },
+    clearSearchResult: (state, action) => {
+      state.data.users = [];
+    },
     incrementPage: (state, action) => {
       const length = action.payload;
       const nextPage = state.data.page + 1;
@@ -72,7 +75,8 @@ const friendSlice = createSlice({
   },
 });
 
-export const { incrementPage, decrementPage } = friendSlice.actions;
+export const { clearData, clearSearchResult, incrementPage, decrementPage } =
+  friendSlice.actions;
 
 export const fetchUsers = createAsyncThunk(
   'friend/users',

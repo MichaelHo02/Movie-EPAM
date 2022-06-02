@@ -54,7 +54,9 @@ const UserCard = ({
       gap={2}
       alignItems={'center'}
       height={'full'}
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+      }}
       cursor={cursor}
     >
       <HStack>

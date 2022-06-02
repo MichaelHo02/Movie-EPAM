@@ -16,16 +16,17 @@ import {
 } from '../redux/slices/friendSlice';
 
 import {
-  incrementPage as incPage,
+  clearData,
   decrementPage as decPage,
+  incrementPage as incPage,
 } from '../redux/slices/friendFavoriteSlice';
 
-import UserCard from '../component/common/card/UserCard';
-import UserHolder from '../component/common/holder/UserHolder';
-import { fetchFavoritesFriends } from '../redux/slices/friendFavoriteSlice';
 import Card from '../component/common/card/Card';
+import UserCard from '../component/common/card/UserCard';
 import CardHolder from '../component/common/holder/CardHolder';
+import UserHolder from '../component/common/holder/UserHolder';
 import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
+import { fetchFavoritesFriends } from '../redux/slices/friendFavoriteSlice';
 
 const displayNumberUser = 4;
 const displayNumberFilm = 12;
@@ -40,6 +41,11 @@ const Home = () => {
   const [films, setFilms] = useState([]);
   const [pageUser, setPageUser] = useState(1);
   const [pageFilm, setPageFilm] = useState(1);
+  const [isClick, setisClick] = useState(false);
+
+  useEffect(() => {
+    dispatch(clearData());
+  }, []);
 
   useEffect(() => {
     dispatch(fetchLikesAndFavorites());
@@ -106,6 +112,7 @@ const Home = () => {
                       onClick={() => {
                         console.log(card.username);
                         dispatch(fetchFavoritesFriends(card.username));
+                        setisClick(true);
                       }}
                     />
                   );
@@ -113,7 +120,7 @@ const Home = () => {
           </UserHolder>
         </Stack>
       </Holder>
-      {films && (
+      {isClick && (
         <>
           <PaginationForList
             currentPage={pageFilm}

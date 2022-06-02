@@ -48,7 +48,7 @@ const friendFavoriteSlice = createSlice({
   },
 });
 
-export const { incrementPage, decrementPage, cleanData } =
+export const { incrementPage, decrementPage, clearData } =
   friendFavoriteSlice.actions;
 
 export const fetchFavoritesFriends = createAsyncThunk(
