@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   decrementPage,
-  incrementPage
+  incrementPage,
 } from '../../../../redux/slices/filmSlice';
 import Holder from '../../holder/Holder';
 import PaginationButton from './PaginationButton';
@@ -24,7 +24,8 @@ const PaginationForList = ({ displayNumber, currentPage, currentFilms }) => {
   }, [currentFilms]);
 
   useEffect(() => {
-    setMaxPage(Math.ceil(films.length / displayNumber));
+    const tmp = Math.ceil(films.length / displayNumber);
+    setMaxPage(tmp ? tmp : 1);
   }, [displayNumber, films.length]);
 
   useEffect(() => {

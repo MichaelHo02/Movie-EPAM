@@ -10,9 +10,8 @@ import {
   Spacer,
   Text,
   useColorModeValue,
-  VStack,
 } from '@chakra-ui/react';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import {
@@ -192,6 +191,7 @@ const Card = ({
                 boxShadow={'md'}
                 onClick={handleLike}
                 variant={statusLike ? 'solid' : 'outline'}
+                borderWidth={1}
                 borderColor={statusLike ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
@@ -202,7 +202,7 @@ const Card = ({
                 boxShadow={'md'}
                 onClick={handleFavorite}
                 variant={statusFavorite ? 'solid' : 'outline'}
-                borderWidth={'1px'}
+                borderWidth={1}
                 borderColor={statusFavorite ? 'transparent' : 'auto'}
               />
             </CustomizeTooltip>
@@ -221,7 +221,7 @@ const Card = ({
               boxShadow={'md'}
               onClick={handleLike}
               variant={statusLike ? 'solid' : 'outline'}
-              borderWidth={'1px'}
+              borderWidth={1}
               borderColor={statusLike ? 'transparent' : 'auto'}
             >
               Like
@@ -241,7 +241,7 @@ const Card = ({
               boxShadow={'md'}
               variant={statusFavorite ? 'solid' : 'outline'}
               onClick={handleFavorite}
-              borderWidth={'1px'}
+              borderWidth={1}
               borderColor={statusFavorite ? 'transparent' : 'auto'}
             >
               Favorite

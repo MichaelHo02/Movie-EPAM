@@ -144,9 +144,11 @@ export const updateFavorites = createAsyncThunk(
     film.data = { ...film.data, genres };
     const username = getSignUpUsername(thunkAPI.getState());
     const name = variant === 'tv' ? film.data.name : film.data.title;
+    const date =
+      variant === 'tv' ? film.data.first_air_date : film.data.release_date;
 
     const res = await filmAPI.addLikeFilmTo(
-      { ...film.data, name },
+      { ...film.data, name, date },
       {
         name: username,
         variant: variant,

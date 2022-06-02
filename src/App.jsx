@@ -8,7 +8,11 @@ function App() {
   return (
     <Authentication>
       <ChakraProvider theme={theme}>
-        <Flex marginX={10} marginY={5} flexDirection={'column'}>
+        <Flex
+          marginX={10}
+          marginY={5}
+          flexDirection={'column'}
+        >
           <Header />
           <Box flex={1}>
             <Outlet />

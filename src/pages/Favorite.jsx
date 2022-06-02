@@ -43,10 +43,10 @@ const Favorite = () => {
       <CardHolder>
         {displayFilm &&
           displayFilm.map(card => {
+            console.log(filmInfo.data.likesId[`${card.id}`]);
             return (
               <Card
                 key={card.id}
-                date={card.first_air_date}
                 title={card.name}
                 {...card}
                 country={card.origin_country}
