@@ -2,7 +2,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../component/common/card/Card';
-import PaginationController from '../component/common/cardController/PaginationController';
+import PaginationController from '../component/common/cardController/pagination/PaginationController';
 import CardHolder from '../component/common/holder/CardHolder';
 import Holder from '../component/common/holder/Holder';
 import { getFilmInfo } from '../redux/selectors';

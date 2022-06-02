@@ -10,9 +10,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilterInfo } from '../../../redux/selectors';
-import { fetchTV } from '../../../redux/slices/filterSlice';
-import Holder from '../holder/Holder';
+import { getFilterInfo } from '../../../../redux/selectors';
+import { fetchTV } from '../../../../redux/slices/filterSlice';
+import Holder from '../../holder/Holder';
 
 const PaginationController = () => {
   const dispatch = useDispatch();

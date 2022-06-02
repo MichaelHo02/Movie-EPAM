@@ -1,10 +1,9 @@
 import { Box } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../component/common/card/Card';
-import CardController from '../component/common/cardController/CardController';
 import FilterController from '../component/common/cardController/FilterController';
-import PaginationController from '../component/common/cardController/PaginationController';
+import PaginationController from '../component/common/cardController/pagination/PaginationController';
 import CardHolder from '../component/common/holder/CardHolder';
 import { getFilmInfo, getFilterInfo } from '../redux/selectors';
 import { fetchLikesAndFavorites } from '../redux/slices/filmSlide';

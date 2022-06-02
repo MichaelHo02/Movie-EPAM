@@ -1,10 +1,9 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import {
-  Box,
   IconButton,
   Input,
   Stack,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
