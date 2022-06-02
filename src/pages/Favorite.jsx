@@ -8,14 +8,21 @@ import Holder from '../component/common/holder/Holder';
 import { getFilmInfo } from '../redux/selectors';
 import { fetchLikesAndFavorites } from '../redux/slices/filmSlice';
 
-const Favorite = ({ displayNumber }) => {
+const displayNumber = 20;
+
+const Favorite = () => {
   const dispatch = useDispatch();
   const filmInfo = useSelector(getFilmInfo);
   const [page, setPage] = useState(1);
+  const [films, setFilms] = useState([]);
   useEffect(() => {
     dispatch(fetchLikesAndFavorites());
   }, []);
-  const films = filmInfo.data.favorites;
+
+  useEffect(() => {
+    setFilms(filmInfo.data.favorites);
+  }, [filmInfo.data.favorites]);
+
   useEffect(() => {
     setPage(filmInfo.data.page);
   }, [filmInfo.data.page]);
@@ -28,7 +35,11 @@ const Favorite = ({ displayNumber }) => {
           Your Favorite TV Shows & Movie
         </Heading>
       </Holder>
-      <PaginationForList />
+      <PaginationForList
+        displayNumber={displayNumber}
+        currentPage={page}
+        currentFilms={films}
+      />
       <CardHolder>
         {displayFilm &&
           displayFilm.map(card => {
@@ -47,7 +58,11 @@ const Favorite = ({ displayNumber }) => {
             );
           })}
       </CardHolder>
-      <PaginationForList />
+      <PaginationForList
+        displayNumber={displayNumber}
+        currentPage={page}
+        currentFilms={films}
+      />
     </Box>
   );
 };

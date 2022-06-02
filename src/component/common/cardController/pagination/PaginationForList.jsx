@@ -1,8 +1,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import { ButtonGroup, Flex, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFilmInfo } from '../../../../redux/selectors';
+import { useDispatch } from 'react-redux';
 import {
   decrementPage,
   incrementPage
@@ -10,15 +9,30 @@ import {
 import Holder from '../../holder/Holder';
 import PaginationButton from './PaginationButton';
 
-const PaginationForList = ({ displayNumber }) => {
+const PaginationForList = ({ displayNumber, currentPage, currentFilms }) => {
   const dispatch = useDispatch();
-  const filmInfo = useSelector(getFilmInfo);
-  const films = filmInfo.data.favorites;
-  const maxPage = Math.floor(films.length / displayNumber) + 1;
   const [page, setPage] = useState(1);
+  const [films, setFilms] = useState([]);
+  const [maxPage, setMaxPage] = useState(1);
+
   useEffect(() => {
-    setPage(filmInfo.data.page);
-  }, [filmInfo.data.page]);
+    setPage(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
+    setFilms(currentFilms);
+  }, [currentFilms]);
+
+  useEffect(() => {
+    setMaxPage(Math.ceil(films.length / displayNumber));
+  }, [displayNumber, films.length]);
+
+  useEffect(() => {
+    if (currentPage > maxPage) {
+      dispatch(decrementPage());
+    }
+  }, [currentPage, dispatch, maxPage]);
+
   return (
     <Holder>
       <Flex alignItems={'center'} padding={4} gap={2}>
