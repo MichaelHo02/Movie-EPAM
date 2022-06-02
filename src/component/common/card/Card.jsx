@@ -182,7 +182,9 @@ const Card = ({
 
           <Spacer />
 
-          <ButtonGroup display={{ lg: 'block', base: 'none' }}>
+          <ButtonGroup
+            display={{ lg: 'block', md: 'none', sm: 'none', base: 'block' }}
+          >
             <CustomizeTooltip message={'Like if you love it'}>
               <IconButton
                 icon={<BiLike />}

@@ -5,13 +5,18 @@ const userAPI = {
     const url = `/users/${id}`;
     return axiosPrivate.get(url);
   },
-  register: param => {
+  register: body => {
     const url = `/users/register`;
-    return axiosPrivate.post(url, param);
+    return axiosPrivate.post(url, body);
   },
-  login: param => {
+  login: body => {
     const url = `/users/login`;
-    return axiosPrivate.post(url, param);
+    return axiosPrivate.post(url, body);
+  },
+  users: params => {
+    const url = `/users`;
+    console.log(params);
+    return axiosPrivate.get(url, { params });
   },
 };
 

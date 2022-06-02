@@ -23,10 +23,10 @@ const Movies = () => {
       <CardController variant={'movie'} />
       <CardHolder>
         {filterInfo.pagination.results &&
-          filterInfo.pagination.results.map((card, index) => {
+          filterInfo.pagination.results.map(card => {
             return (
               <Card
-                key={index}
+                key={card.id}
                 date={card.release_date}
                 title={card.name}
                 {...card}

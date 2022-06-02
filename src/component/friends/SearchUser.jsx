@@ -1,15 +1,22 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import {
-  Box, IconButton,
+  Box,
+  IconButton,
   Input,
   Stack,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchUsers } from '../../redux/slices/friendSlice';
 
 const SearchUser = () => {
   const backgroundColor = useColorModeValue('gray.200', 'gray.700');
   const [value, setValue] = useState('');
+  const dispatch = useDispatch();
+  const handleSearch = () => {
+    dispatch(fetchUsers(value));
+  };
   return (
     <Box
       marginY={4}
@@ -23,6 +30,7 @@ const SearchUser = () => {
           placeholder={'Find friends by username'}
           _placeholder={{ opacity: 0.8, color: 'inherit' }}
           size={'lg'}
+          variant={'filled'}
           focusBorderColor={'teal.500'}
           value={value}
           onChange={e => setValue(e.target.value)}
@@ -32,6 +40,7 @@ const SearchUser = () => {
           size={'lg'}
           colorScheme={'teal'}
           variant={'outline'}
+          onClick={handleSearch}
         />
       </Stack>
     </Box>

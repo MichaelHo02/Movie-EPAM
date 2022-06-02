@@ -8,3 +8,5 @@ export const getGenresInfo = state => state.genreInfo;
 export const getFilmInfo = state => state.filmInfo;
 
 export const getFilterInfo = state => state.filterInfo;
+
+export const getUsersInfo = state => state.userInfo;
