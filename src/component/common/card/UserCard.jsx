@@ -1,20 +1,18 @@
+import { AddIcon } from '@chakra-ui/icons';
 import {
-  Box,
-  Button,
-  Flex,
-  HStack,
+  Button, HStack,
   IconButton,
+  Radio,
   Spacer,
   Stack,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
 import Avvvatars from 'avvvatars-react';
-import { AddIcon } from '@chakra-ui/icons';
-import CustomizeTooltip from '../tooltip/CustomizeTooltip';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addFriends, removeFriends } from '../../../redux/slices/friendSlice';
+import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 
 const UserCard = ({
   username,

@@ -42,6 +42,7 @@ const Home = () => {
   const [pageUser, setPageUser] = useState(1);
   const [pageFilm, setPageFilm] = useState(1);
   const [isClick, setisClick] = useState(false);
+  const [selectedUser, setSelectedUser] = useState('');
 
   useEffect(() => {
     dispatch(clearData());
@@ -111,6 +112,7 @@ const Home = () => {
                       cursor={'pointer'}
                       onClick={() => {
                         console.log(card.username);
+                        setSelectedUser(card.username);
                         dispatch(fetchFavoritesFriends(card.username));
                         setisClick(true);
                       }}
@@ -122,6 +124,14 @@ const Home = () => {
       </Holder>
       {isClick && (
         <>
+          <Holder>
+            <Text
+              paddingY={4}
+              paddingX={8}
+              fontSize={'xl'}
+              fontWeight={'bold'}
+            >{`You are looking at ${selectedUser} collection`}</Text>
+          </Holder>
           <PaginationForList
             currentPage={pageFilm}
             currentMaxPage={maxPageFilm}
@@ -151,6 +161,12 @@ const Home = () => {
                 );
               })}
           </CardHolder>
+          <PaginationForList
+            currentPage={pageFilm}
+            currentMaxPage={maxPageFilm}
+            incrementPage={incPage}
+            decrementPage={decPage}
+          />
         </>
       )}
     </Box>
