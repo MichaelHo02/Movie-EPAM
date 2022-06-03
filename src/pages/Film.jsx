@@ -233,22 +233,20 @@ const Film = () => {
               </Holder>
             )}
             {currentFilm.genres && (
-              <CustomizeTooltip message={'Genres'}>
-                <Badge
-                  textAlign={'center'}
-                  fontSize={'lg'}
-                  variant={'subtle'}
-                  colorScheme={'gray'}
-                  padding={2}
-                  borderRadius={'lg'}
-                  boxShadow={'md'}
-                  textTransform={'none'}
-                  whiteSpace={'normal'}
-                  wordBreak={'break-word'}
-                >
-                  {currentFilm.genres.toString()}
-                </Badge>
-              </CustomizeTooltip>
+              <Badge
+                textAlign={'center'}
+                fontSize={'lg'}
+                variant={'subtle'}
+                colorScheme={'gray'}
+                padding={2}
+                borderRadius={'lg'}
+                boxShadow={'md'}
+                textTransform={'none'}
+                whiteSpace={'normal'}
+                wordBreak={'break-word'}
+              >
+                Genres: {currentFilm.genres.toString()}
+              </Badge>
             )}
           </Flex>
         </Stack>
