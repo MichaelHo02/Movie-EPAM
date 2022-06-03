@@ -205,14 +205,15 @@ const Film = () => {
               {console.log(currentFilm.homepage)}
               {currentFilm.homepage && (
                 <Button
+                  as={'a'}
                   colorScheme={'orange'}
                   boxShadow={'md'}
                   padding={2}
                   flex={1}
+                  href={currentFilm.homepage}
+                  target={'_blank'}
                 >
-                  <Link href={currentFilm.homepage} isExternal>
-                    Homepage
-                  </Link>
+                  Homepage
                 </Button>
               )}
             </Stack>

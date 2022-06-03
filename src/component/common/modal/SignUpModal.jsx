@@ -143,8 +143,12 @@ const SignUpModal = ({ isOpen, onClose }) => {
           >
             Close
           </Button>
-          <Button colorScheme={'teal'} onClick={formik.handleSubmit}>
-            {authInfo.status === 'pending' ? <Spinner /> : `Submit`}
+          <Button
+            colorScheme={'teal'}
+            onClick={formik.handleSubmit}
+            isLoading={authInfo.status === 'pending'}
+          >
+            Submit
           </Button>
         </ModalFooter>
       </ModalContent>
