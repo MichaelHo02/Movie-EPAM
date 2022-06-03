@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Skeleton } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../component/common/card/Card';
@@ -22,26 +22,34 @@ const Movies = () => {
   return (
     <Box marginBottom={10}>
       <FilterController variant={'movie'} />
-      <PaginationController />
-      <CardHolder>
-        {filterInfo.pagination.results &&
-          filterInfo.pagination.results.map(card => {
-            return (
-              <Card
-                key={card.id}
-                date={card.release_date}
-                title={card.name}
-                {...card}
-                country={card.original_language}
-                countryDesc={'Original language'}
-                variant={'movie'}
-                currentStatusLike={filmInfo.data.likesId[`${card.id}`]}
-                currentStatusFavorite={filmInfo.data.favoritesId[`${card.id}`]}
-              />
-            );
-          })}
-      </CardHolder>
-      <PaginationController />
+      <Skeleton isLoaded={filterInfo.status !== 'pending'}>
+        <PaginationController />
+      </Skeleton>
+      <Skeleton isLoaded={filterInfo.status !== 'pending'}>
+        <CardHolder>
+          {filterInfo.pagination.results &&
+            filterInfo.pagination.results.map(card => {
+              return (
+                <Card
+                  key={card.id}
+                  date={card.release_date}
+                  title={card.name}
+                  {...card}
+                  country={card.original_language}
+                  countryDesc={'Original language'}
+                  variant={'movie'}
+                  currentStatusLike={filmInfo.data.likesId[`${card.id}`]}
+                  currentStatusFavorite={
+                    filmInfo.data.favoritesId[`${card.id}`]
+                  }
+                />
+              );
+            })}
+        </CardHolder>
+      </Skeleton>
+      <Skeleton isLoaded={filterInfo.status !== 'pending'}>
+        <PaginationController />
+      </Skeleton>
     </Box>
   );
 };

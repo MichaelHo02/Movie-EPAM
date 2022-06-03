@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, Skeleton, Stack, Text, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationForList from '../component/common/cardController/pagination/PaginationForList';
@@ -78,44 +78,50 @@ const Home = () => {
         </VStack>
       </Holder>
 
-      <Holder>
-        <Stack padding={8} gap={2}>
-          <Text fontSize={'xl'} fontWeight={'bold'}>
-            Click to see your friends favorites collection
-          </Text>
-          <PaginationForList
-            currentPage={pageUser}
-            currentMaxPage={maxPageUser}
-            incrementPage={incrementPage}
-            decrementPage={decrementPage}
-            variant={'inner'}
-          />
-          <UserHolder>
-            {displayUsers &&
-              displayUsers
-                .filter(user => user.username !== username)
-                .map(card => {
-                  return (
-                    <UserCard
-                      key={card.username}
-                      {...card}
-                      variant={'display'}
-                      currentStatusFriend={
-                        userInfo.data.friendsName[card.username]
-                      }
-                      cursor={'pointer'}
-                      onClick={() => {
-                        console.log(card.username);
-                        setSelectedUser(card.username);
-                        dispatch(fetchFavoritesFriends(card.username));
-                        setisClick(true);
-                      }}
-                    />
-                  );
-                })}
-          </UserHolder>
-        </Stack>
-      </Holder>
+      <Skeleton isLoaded={userInfo.status !== 'pending'}>
+        <Holder>
+          <Stack padding={8} gap={2}>
+            <Text fontSize={'xl'} fontWeight={'bold'}>
+              Click to see your friends favorites collection
+            </Text>
+            <Skeleton isLoaded={favoriteInfo.status !== 'pending'}>
+              <PaginationForList
+                currentPage={pageUser}
+                currentMaxPage={maxPageUser}
+                incrementPage={incrementPage}
+                decrementPage={decrementPage}
+                variant={'inner'}
+              />
+            </Skeleton>
+            <Skeleton isLoaded={userInfo.status !== 'pending'}>
+              <UserHolder>
+                {displayUsers &&
+                  displayUsers
+                    .filter(user => user.username !== username)
+                    .map(card => {
+                      return (
+                        <UserCard
+                          key={card.username}
+                          {...card}
+                          variant={'display'}
+                          currentStatusFriend={
+                            userInfo.data.friendsName[card.username]
+                          }
+                          cursor={'pointer'}
+                          onClick={() => {
+                            console.log(card.username);
+                            setSelectedUser(card.username);
+                            dispatch(fetchFavoritesFriends(card.username));
+                            setisClick(true);
+                          }}
+                        />
+                      );
+                    })}
+              </UserHolder>
+            </Skeleton>
+          </Stack>
+        </Holder>
+      </Skeleton>
       {isClick && (
         <>
           <Holder>

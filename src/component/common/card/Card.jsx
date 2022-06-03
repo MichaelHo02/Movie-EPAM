@@ -9,6 +9,7 @@ import {
   Image,
   LinkBox,
   LinkOverlay,
+  Skeleton,
   Spacer,
   Text,
   useColorModeValue,
@@ -135,7 +136,7 @@ const Card = ({
             gap={2}
           >
             <Image
-              fallback={<Box textAlign={'center'}>No image available</Box>}
+              fallback={<Skeleton height={'full'} />}
               src={`https://image.tmdb.org/t/p/original${poster_path}`}
               alt={'poster'}
               borderRadius={'base'}

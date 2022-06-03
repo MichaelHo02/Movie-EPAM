@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Skeleton } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../component/common/card/Card';
@@ -40,36 +40,47 @@ const Favorite = () => {
           Your Favorite TV Shows & Movie
         </Heading>
       </Holder>
-      <PaginationForList
-        currentPage={page}
-        currentMaxPage={maxPage}
-        incrementPage={incrementPage}
-        decrementPage={decrementPage}
-      />
-      <CardHolder>
-        {displayFilms &&
-          displayFilms.map(card => {
-            return (
-              <Card
-                key={card.id}
-                title={card.name}
-                {...card}
-                country={card.country}
-                countryDesc={
-                  card.variant === 'tv' ? 'Origin Country' : 'Original language'
-                }
-                variant={card.variant}
-                currentStatusLike={filmInfo.data.likesId[`${card.id}`]}
-                currentStatusFavorite={filmInfo.data.favoritesId[`${card.id}`]}
-              />
-            );
-          })}
-      </CardHolder>
-      <PaginationForList
-        displayNumber={displayNumber}
-        currentPage={page}
-        currentFilms={films}
-      />
+      <Skeleton isLoaded={filmInfo.status !== 'pending'}>
+        <PaginationForList
+          currentPage={page}
+          currentMaxPage={maxPage}
+          incrementPage={incrementPage}
+          decrementPage={decrementPage}
+        />
+      </Skeleton>
+      <Skeleton isLoaded={filmInfo.status !== 'pending'}>
+        <CardHolder>
+          {displayFilms &&
+            displayFilms.map(card => {
+              return (
+                <Card
+                  key={card.id}
+                  title={card.name}
+                  {...card}
+                  country={card.country}
+                  countryDesc={
+                    card.variant === 'tv'
+                      ? 'Origin Country'
+                      : 'Original language'
+                  }
+                  variant={card.variant}
+                  currentStatusLike={filmInfo.data.likesId[`${card.id}`]}
+                  currentStatusFavorite={
+                    filmInfo.data.favoritesId[`${card.id}`]
+                  }
+                />
+              );
+            })}
+        </CardHolder>
+      </Skeleton>
+      <Skeleton isLoaded={filmInfo.status !== 'pending'}>
+        <PaginationForList
+          currentPage={page}
+          currentMaxPage={maxPage}
+          incrementPage={incrementPage}
+          decrementPage={decrementPage}
+        />
+      </Skeleton>
     </Box>
   );
 };
