@@ -6,6 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -17,7 +18,11 @@ import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/slices/authSlice';
-import { getResponse, getSignUpUsername } from '../../../redux/selectors';
+import {
+  getAuthInfo,
+  getResponse,
+  getSignUpUsername,
+} from '../../../redux/selectors';
 YupPassword(Yup);
 
 const SignInModal = ({ isOpen, onClose }) => {
@@ -29,6 +34,7 @@ const SignInModal = ({ isOpen, onClose }) => {
 
   const response = useSelector(getResponse);
   const username = useSelector(getSignUpUsername);
+  const authInfo = useSelector(getAuthInfo);
 
   const formik = useFormik({
     initialValues: {
@@ -112,7 +118,7 @@ const SignInModal = ({ isOpen, onClose }) => {
             Close
           </Button>
           <Button colorScheme={'teal'} onClick={formik.handleSubmit}>
-            Submit
+            {authInfo.status === 'pending' ? <Spinner /> : `Submit`}
           </Button>
         </ModalFooter>
       </ModalContent>

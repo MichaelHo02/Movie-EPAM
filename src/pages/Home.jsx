@@ -46,13 +46,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(clearData());
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchLikesAndFavorites());
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchUsers(''));
   }, [dispatch]);
 

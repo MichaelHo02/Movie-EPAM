@@ -6,21 +6,23 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import {
+  getAuthInfo,
   getResponse,
   getSignUpEmail,
   getSignUpUsername,
 } from '../../../redux/selectors';
-import { register } from '../../../redux/slices/authSlice';
+import { clearUser, register } from '../../../redux/slices/authSlice';
 import CustomInput from '../form/CustomInput';
 
 YupPassword(Yup);
@@ -33,7 +35,8 @@ const SignUpModal = ({ isOpen, onClose }) => {
   const toast = useToast();
   const username = useSelector(getSignUpUsername);
   const response = useSelector(getResponse);
-  let email = useSelector(getSignUpEmail);
+  const authInfo = useSelector(getAuthInfo);
+  const email = useSelector(getSignUpEmail);
 
   const formik = useFormik({
     initialValues: {
@@ -46,8 +49,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
       username: Yup.string()
         .required('User name is required')
         .min(2, 'At least 2 letters required')
-        .max(100, 'Maximum letter is 100')
-        .matches('/^[A-Za-z0-9]+$', 'Only numbers and letters are allowed'),
+        .max(100, 'Maximum letter is 100'),
       password: Yup.string()
         .required('Password is required')
         .password()
@@ -67,6 +69,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
         duration: 3000,
         isClosable: true,
       });
+      dispatch(clearUser());
     } else if (response.success) {
       toast({
         title: `Welcome back! ${username}`,
@@ -79,7 +82,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
       onClose();
       navigate('home');
     }
-  }, [response]);
+  }, [formik, navigate, onClose, response, toast, username]);
   return (
     <Modal
       isCentered
@@ -141,7 +144,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
             Close
           </Button>
           <Button colorScheme={'teal'} onClick={formik.handleSubmit}>
-            Submit
+            {authInfo.status === 'pending' ? <Spinner /> : `Submit`}
           </Button>
         </ModalFooter>
       </ModalContent>
