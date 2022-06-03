@@ -1,7 +1,7 @@
 import { Box, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
-const Holder = ({ children, props, marginY = 4, variant = 'base' }) => {
+const Holder = ({ children, marginY = 4, variant = 'base', ...props }) => {
   let backgroundColor1 = useColorModeValue('gray.200', 'gray.700');
   let backgroundColor2 = useColorModeValue('gray.300', 'gray.600');
   return (

@@ -23,6 +23,11 @@ import {
   updateFavorites,
   updateLikes,
 } from '../../../redux/slices/filmSlice';
+import {
+  findPopularityColor,
+  findVoteAvgColor,
+  findVoteCountColor,
+} from '../../../utils/colorSelection';
 
 import CustomizeTooltip from '../tooltip/CustomizeTooltip';
 
@@ -158,6 +163,7 @@ const Card = ({
                 boxShadow={'md'}
                 textTransform={'none'}
                 colorScheme={voteCountColor}
+                as={Button}
               >
                 {vote_count}
               </Badge>
@@ -173,6 +179,7 @@ const Card = ({
                 borderRadius={'lg'}
                 boxShadow={'md'}
                 textTransform={'none'}
+                as={Button}
               >
                 {vote_average} / 10
               </Badge>
@@ -187,6 +194,7 @@ const Card = ({
                 padding={2}
                 borderRadius={'lg'}
                 boxShadow={'md'}
+                as={Button}
               >
                 {popularity.toFixed(2)}
               </Badge>
@@ -202,6 +210,7 @@ const Card = ({
                   padding={2}
                   borderRadius={'lg'}
                   boxShadow={'md'}
+                  as={Button}
                 >
                   {country.toString()}
                 </Badge>
@@ -288,18 +297,3 @@ const Card = ({
 };
 
 export default Card;
-
-const findVoteCountColor = value =>
-  value < 100
-    ? 'red'
-    : value < 200
-    ? 'yellow'
-    : value < 300
-    ? 'green'
-    : 'purple';
-
-const findVoteAvgColor = value =>
-  value < 5 ? 'red' : value < 8 ? 'green' : 'purple';
-
-const findPopularityColor = value =>
-  value < 500 ? 'red' : value < 1000 ? 'green' : 'purple';

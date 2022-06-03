@@ -99,6 +99,13 @@ const filmSlice = createSlice({
       .addCase(fetchTV.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.data.film = action.payload;
+      })
+      .addCase(fetchMovie.pending, (state, action) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchMovie.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.data.film = action.payload;
       });
   },
 });
@@ -201,6 +208,11 @@ export const fetchMovie = createAsyncThunk(
   'film/fetchMovie',
   async (id, thunkAPI) => {
     let film = await moviesAPI.getMovie(id);
+    const genres = film.data.genres.map(genre => genre.name);
+    film.data = { ...film.data, genres };
+    const name = film.data.name;
+    const res = { ...film.data, name, variant: 'tv' };
+    return res;
   }
 );
 

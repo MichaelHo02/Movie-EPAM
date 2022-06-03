@@ -46,7 +46,8 @@ const SignUpModal = ({ isOpen, onClose }) => {
       username: Yup.string()
         .required('User name is required')
         .min(2, 'At least 2 letters required')
-        .max(100, 'Maximum letter is 100'),
+        .max(100, 'Maximum letter is 100')
+        .matches('/^[A-Za-z0-9]+$', 'Only numbers and letters are allowed'),
       password: Yup.string()
         .required('Password is required')
         .password()
