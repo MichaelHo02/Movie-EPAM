@@ -1,5 +1,5 @@
 import { Box, Heading } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserCard from '../component/common/card/UserCard';
 import CardHolder from '../component/common/holder/CardHolder';

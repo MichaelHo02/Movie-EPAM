@@ -3,18 +3,16 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   Image,
   Link,
-  Spacer,
   Stack,
   Text,
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Holder from '../component/common/holder/Holder';
 import CustomizeTooltip from '../component/common/tooltip/CustomizeTooltip';
 import { getFilmInfo } from '../redux/selectors';
