@@ -24,6 +24,7 @@ const authSlice = createSlice({
       state.response.message = '';
     },
     createUser: (state, action) => {
+      state.status = 'idle';
       state.data = action.payload;
     },
     updateUsername: (state, action) => {
@@ -46,6 +47,9 @@ const authSlice = createSlice({
         state.response = action.payload.response;
         state.data = action.payload.data;
       })
+      .addCase(register.rejected, (state, action) => {
+        state.status = 'idle';
+      })
       .addCase(login.pending, (state, action) => {
         state.status = 'pending';
       })
@@ -55,6 +59,9 @@ const authSlice = createSlice({
         if (action.payload.data) {
           state.data = action.payload.data;
         }
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.status = 'idle';
       });
   },
 });

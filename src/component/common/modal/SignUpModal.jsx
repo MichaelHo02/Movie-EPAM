@@ -82,7 +82,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
       onClose();
       navigate('home');
     }
-  }, [formik, navigate, onClose, response, toast, username]);
+  }, [dispatch, formik, navigate, onClose, response, toast, username]);
   return (
     <Modal
       isCentered
