@@ -39,7 +39,7 @@ const friendSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.users = action.payload.users;
         state.data.friends = action.payload.friends;
         const jsonFriends = {};
@@ -52,7 +52,7 @@ const friendSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(addFriends.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.friends = action.payload;
         const jsonFriends = {};
         action.payload.forEach(friend => (jsonFriends[friend.username] = true));
@@ -62,7 +62,7 @@ const friendSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(removeFriends.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.friends = action.payload;
         const jsonFriends = {};
         action.payload.forEach(friend => (jsonFriends[friend.username] = true));

@@ -21,7 +21,7 @@ const Favorite = () => {
   const [films, setFilms] = useState([]);
   useEffect(() => {
     dispatch(fetchLikesAndFavorites());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setFilms(filmInfo.data.favorites);

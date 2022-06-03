@@ -36,7 +36,6 @@ const Film = () => {
   );
 
   useEffect(() => {
-    console.log(id);
     if (variant === 'tv') {
       dispatch(fetchTV(id));
     } else {
@@ -58,7 +57,6 @@ const Film = () => {
   const country =
     variant === 'tv' ? film.origin_country : film.original_language;
   const countryDesc = variant === 'tv' ? 'Origin Country' : 'Original Language';
-  console.log(currentFilm);
   return (
     <Holder
       padding={4}

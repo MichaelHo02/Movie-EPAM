@@ -23,7 +23,7 @@ const Movies = () => {
     <Box marginBottom={10}>
       <FilterController variant={'movie'} />
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
-        <PaginationController />
+        <PaginationController variant={'movie'} />
       </Skeleton>
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
         <CardHolder>
@@ -48,7 +48,7 @@ const Movies = () => {
         </CardHolder>
       </Skeleton>
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
-        <PaginationController />
+        <PaginationController variant={'movie'} />
       </Skeleton>
     </Box>
   );

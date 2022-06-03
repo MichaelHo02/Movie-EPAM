@@ -1,10 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import {
-  IconButton,
-  Input,
-  Stack,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { IconButton, Input, Stack, useColorModeValue } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsers } from '../../redux/slices/friendSlice';

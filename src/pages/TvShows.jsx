@@ -22,7 +22,7 @@ const TvShows = () => {
     <Box marginBottom={10}>
       <FilterController variant={'tv'} />
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
-        <PaginationController />
+        <PaginationController variant={'tv'} />
       </Skeleton>
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
         <CardHolder>
@@ -47,7 +47,7 @@ const TvShows = () => {
         </CardHolder>
       </Skeleton>
       <Skeleton isLoaded={filterInfo.status !== 'pending'}>
-        <PaginationController />
+        <PaginationController variant={'tv'} />
       </Skeleton>
     </Box>
   );

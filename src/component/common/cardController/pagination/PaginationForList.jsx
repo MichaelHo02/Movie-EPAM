@@ -40,6 +40,7 @@ const PaginationForList = ({
             icon={<ArrowLeftIcon />}
             onClick={() => {
               dispatch(decrementPage());
+              window.scrollTo(0, 0);
             }}
             isDisabled={page === 1}
           />
@@ -47,6 +48,7 @@ const PaginationForList = ({
             icon={<ArrowRightIcon />}
             onClick={() => {
               dispatch(incrementPage(maxPage));
+              window.scrollTo(0, 0);
             }}
             isDisabled={page === maxPage}
           />

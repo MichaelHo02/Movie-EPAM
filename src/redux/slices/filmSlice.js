@@ -47,7 +47,7 @@ const filmSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(updateLikes.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.likes = action.payload;
         const json = {};
         action.payload.forEach(({ id }) => (json[id] = true));
@@ -57,7 +57,7 @@ const filmSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(updateFavorites.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.favorites = action.payload;
         const json = {};
         action.payload.forEach(({ id }) => (json[id] = true));
@@ -67,7 +67,7 @@ const filmSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchLikesAndFavorites.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.likes = action.payload.likes;
         state.data.favorites = action.payload.favorites;
         const jsonLikes = {};
@@ -83,28 +83,28 @@ const filmSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(removeLikes.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.likes = action.payload.likes;
       })
       .addCase(removeFavorites.pending, (state, action) => {
         state.status = 'pending';
       })
       .addCase(removeFavorites.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.favorites = action.payload.favorites;
       })
       .addCase(fetchTV.pending, (state, action) => {
         state.status = 'pending';
       })
       .addCase(fetchTV.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.film = action.payload;
       })
       .addCase(fetchMovie.pending, (state, action) => {
         state.status = 'pending';
       })
       .addCase(fetchMovie.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.film = action.payload;
       });
   },

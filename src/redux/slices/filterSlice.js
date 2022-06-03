@@ -59,14 +59,14 @@ const filterSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchTV.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.pagination = action.payload;
       })
       .addCase(fetchMovie.pending, (state, action) => {
         state.status = 'pending';
       })
       .addCase(fetchMovie.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.pagination = action.payload;
       });
   },

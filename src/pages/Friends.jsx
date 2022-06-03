@@ -15,7 +15,7 @@ const Friends = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(clearSearchResult());
-  }, []);
+  }, [dispatch]);
   useEffect(() => setCards(info.data.users), [info]);
   return (
     <Box marginBottom={10}>

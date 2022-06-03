@@ -15,9 +15,7 @@ const Footer = () => {
           A product of
         </Text>
         <Img src={IllustrationResource.RmitLogo} alt="RMIT logo" w="60px" />
-        <Text fontWeight="bold">
-          RMIT University
-        </Text>
+        <Text fontWeight="bold">RMIT University</Text>
       </Flex>
       <Text>Made by Ho Le Minh Thach</Text>
     </VStack>

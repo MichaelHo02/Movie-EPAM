@@ -33,7 +33,7 @@ const friendFavoriteSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchFavoritesFriends.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
+        state.status = 'idle';
         state.data.likes = action.payload.likes;
         state.data.favorites = action.payload.favorites;
         const jsonLikes = {};
