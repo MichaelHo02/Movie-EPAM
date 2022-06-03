@@ -16,10 +16,6 @@ const filterSlice = createSlice({
       'with_runtime.lte': null,
       sort_by: null,
     },
-    response: {
-      success: null,
-      message: '',
-    },
     pagination: {
       page: 1,
       total_pages: 1,

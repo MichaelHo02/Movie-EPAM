@@ -12,10 +12,6 @@ const friendSlice = createSlice({
       friendsName: {},
       page: 1,
     },
-    response: {
-      success: null,
-      message: '',
-    },
   },
   reducers: {
     clearData: (state, data) => {

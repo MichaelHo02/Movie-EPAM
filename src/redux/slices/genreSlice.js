@@ -7,10 +7,6 @@ const genreSlice = createSlice({
   initialState: {
     status: 'idle',
     data: [],
-    response: {
-      success: null,
-      message: '',
-    },
   },
   reducers: {
     setGenre: (state, action) => {
